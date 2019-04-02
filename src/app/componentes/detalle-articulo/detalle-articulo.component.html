@@ -1,0 +1,61 @@
+<section>
+  <div class="container">
+    <article *ngFor="let articulo of detalleArticulo">
+      <div class="col">
+        <div class="row">
+          <h2>{{articulo.nombre}}</h2>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="col">
+        <div class="row">
+          <div class="col-12 col-sm-5 col-lg-3">
+            <div class="row">
+              <img class="foto" [attr.src]="'assets/img/' + articulo.imagen">
+            </div>
+          </div>
+
+          <div class="col content">
+            <div class="row content">
+              <div>
+                <h5><span>Descripción</span></h5>
+                <p class="descripcion">{{articulo.descripcion}}</p>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-md-5 col-lg-3">
+                  <h5><span>Disponibilidad</span></h5>
+                  <p class="disponible text-center" *ngIf="articulo.stock >= 1">En stock!</p>
+                  <p class="agotado text-center" *ngIf="articulo.stock == 0">Sin stock</p>
+                </div>
+
+                <div class="col-12 col-md col-lg-2">
+                  <h5><span>Precio</span></h5>
+                  <p>{{articulo.precio}}€</p>
+                </div>
+
+                <div class="col-12 col-md col-lg-3">
+                  <h5><span>Marca</span></h5>
+                  <p>{{articulo.marca}}</p>
+                </div>
+
+                <div class="col-12" *ngIf="articulo.stock >= 1">
+                  <div class="cantidadWrapper">
+                    <h5><span>Cantidad</span></h5>
+                    <input id="cantidad" type="number" [(ngModel)]="cantidad" [value]="cantidad" min=1 max="{{articulo.stock}}" class="form-control" step=1>
+                  </div>
+
+                  <div class="comprarWrapper">
+                      <button class="btn btn-success comprar" (click)="actualizarCarrito(articulo)">Comprar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

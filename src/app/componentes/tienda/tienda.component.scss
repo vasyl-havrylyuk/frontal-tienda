@@ -1,0 +1,89 @@
+section {
+    background: #e1e1e1;
+    
+    .container {
+        position:relative;
+
+        .col.menu {
+            mat-checkbox {
+                /deep/ &.mat-checkbox-focused{
+                    .mat-ink-ripple{
+                        background-color: rgba(255, 0, 0, 0.938);
+                    }
+                }
+            }
+
+            background:#f3f3f3;
+            border-left: 1px solid rgb(219, 219, 219);
+            border-right: 1px solid rgb(219, 219, 219);
+
+            .filtro {
+                margin-top: 15px;
+
+                input {
+                    width: 100%;
+                    padding:5px 20px;
+                }
+            }
+
+
+            nav#sidebar {
+                .card {
+                    .card-header {
+                        background: #2b0238 !important;
+                    }
+
+
+                    .btn-link {
+                        color:white;
+                        padding-left:0;
+                    }
+                }
+            }
+
+        }
+
+        .col.articulos {
+            .row.articles {
+                padding-top: 15px; 
+    
+                .col.articleMaterial {
+                    margin-bottom:20px;
+
+                    h2.nombre {
+                        background: white;
+                        min-height: 60px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size:1.1rem;
+                        padding:0 10px !important;
+                        margin-bottom: 0;
+                    }
+            
+                    img.articulo {
+                        width:100%;
+                    }
+
+                    article {
+                        border: 1px solid #e4e4e4;
+                        border-radius: 10px;
+
+                        .card-content {
+                            background: #fff;
+                            padding:15px;
+
+                            .precio {
+                                text-align: center;
+                                font-weight: bold;
+                                font-size:1.5rem;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

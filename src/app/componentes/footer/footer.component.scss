@@ -1,0 +1,22 @@
+footer {
+    background: #000;
+    margin-top:100px;
+    
+    .container {
+        padding-top:15px;
+        padding-bottom:15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .copyright {
+            color:#fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .contacto {
+            justify-content: flex-end;
+        }
+    }
+}

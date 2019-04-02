@@ -1,0 +1,46 @@
+section {
+    .container {
+
+        h2.carrito {
+            margin: 15px 0;
+        }
+
+
+        .row.articulo {
+            margin-bottom:50px;
+        
+            img.articulo {
+                width:100%;
+            }
+
+            .eliminarDelCarrito {
+                cursor: pointer;
+            }
+
+            &:hover {
+                background: rgb(246, 246, 246);
+            }
+        }
+
+
+        .btn.vaciarCarrito {
+            margin-bottom:30px;
+        }
+
+        .row.totalPagar {
+            h3.total {
+                padding: 10px;
+                background: #f3f3f3;
+                margin-bottom: 20px;
+            }
+
+            .btn.finalizarCompra {
+                border-radius: unset;
+            }
+        }
+        
+    }
+}
+
+
+

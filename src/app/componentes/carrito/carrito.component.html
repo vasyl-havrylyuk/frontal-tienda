@@ -1,0 +1,64 @@
+<section>
+  <div class="container">
+    <ng-container *ngIf="carrito.length == 0">
+      <h2 class="carrito">Carrito (vacio)</h2>
+    </ng-container>
+
+    <ng-container *ngIf="carrito.length >= 1">
+      <h2 class="carrito">Carrito ({{carrito.length}})</h2>
+
+      <div class="row">
+        <div class="col-12 col-lg-8">
+
+          <ng-container *ngFor="let articulo of carrito">
+            <div class="row articulo">
+              <div class="col-4 col-sm-3">
+                <img class="articulo" [attr.src]="'assets/img/' + articulo.imagen">
+              </div>
+
+              <div class="col col-sm">
+                <div class="row">
+                  <div class="col-12">
+                    <h5>{{articulo.nombre}}</h5>
+                  </div>
+                  <div class="col-6 col-sm text-nowrap">Precio: {{articulo.precio}}€</div>
+                  <div class="col-6 col-sm text-nowrap">Cantidad: {{articulo.cantidad}}</div>
+                  <div class="col-6 col-sm text-nowrap">Total: {{articulo.totalArticulo}}€</div>
+                  <div class="col-6 col-sm text-right text-center text-sm-right">
+                    <i class="fas fa-times eliminarDelCarrito" (click)="eliminarDelCarrito(articulo)"></i>
+                  </div>
+                  <div class="col-12">
+                    <hr>
+                  </div>
+
+                  <div class="col-12">
+                    <a routerLink="/tienda/articulo/{{articulo.k}}">Revisar detalles</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+
+          <button class="btn btn-outline-danger d-block mx-auto vaciarCarrito" (click)="vaciarCarrito()">Vaciar carrito</button>
+        </div>
+
+        <div class="col-12 col-lg">
+          <div class="row totalPagar">
+            <div class="col-12">
+              <h3 class="total text-center"><strong>Total a pagar</strong>: {{totalCarrito}}€</h3>
+            </div>
+
+            <div class="col-12 text-center">
+              <button class="btn btn-primary finalizarCompra" (click)="finalizarCompra()">
+                FINALIZAR LA COMPRA
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</section>

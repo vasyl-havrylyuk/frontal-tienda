@@ -1,0 +1,67 @@
+section {
+    .container {
+        article {
+            margin-top:25px;
+            margin-bottom:600px;
+
+            h2 {
+                color: #2b0238;
+            }
+
+            .foto {
+                width:100%;
+            }
+
+            .col.content {
+                
+                .row.content {
+                    padding-top:15px;
+                    padding-left: 15px;
+                    padding-right:15px;
+                    flex-direction: column;
+
+                    .descripcion {
+                        font-size: 1.1rem;
+                    }
+
+                    .d-flex {
+                        div {
+                            margin-right: 5px;
+                        }
+                    }
+
+                    .cantidadWrapper {
+                        margin-top:10px;
+
+                        input[type=number] {
+                            margin:15px 0;
+                            width:90px;
+                        }
+
+                        input[type=number]::before {
+                            font-size:200px;
+                        }
+                    }
+
+
+                    .comprarWrapper {
+                        .btn {
+                            width:90px;
+                        }
+                        
+                    }
+
+                    .agotado {background: #ff5545; color: white;}
+                    .disponible {background: #a3f3a3;}
+
+
+                    h5 {
+                        span {
+                            border-bottom: 4px solid #c9c9c9;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

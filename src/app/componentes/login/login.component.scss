@@ -1,0 +1,18 @@
+.modal {
+    background: #000000f3;
+    
+    .login-dialog {
+        max-width:400px;
+    }
+
+    .registro-dialog {
+        max-width:500px;
+    }
+
+
+    @media only screen and (max-width:600px) {
+        .modal-dialog {
+            max-width:100%;
+        }   
+    }
+}

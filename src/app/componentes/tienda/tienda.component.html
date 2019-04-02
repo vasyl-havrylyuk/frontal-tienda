@@ -1,0 +1,112 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col col-12 col-md-4 col-lg-3 menu">
+
+                <!-- CAJA PARA ORDENAR -->
+                <div class="ordenar form-group">
+                    <label class="sr-only" for="ordenar">Ordenar</label>
+                    
+                    <select class="filtro form-control" name="ordenar" id="ordenar" (change)="ordenar($event)">
+                        <option value="desc">Precio: más caros primero</option>
+                        <option value="asc">Precio: más baratos primero</option>
+                    </select>
+                </div>
+                
+                <!-- CAJA DE FILTRAR TEXTO -->
+                <div class="filtro busqueda form-group">
+                    <label class="sr-only" for="buscar">¿Que buscas?</label>
+                    <input class="form-control" type="text" id="buscar" placeholder="Que buscas?" (keyup)="filtrarPorTitulo($event)">
+                </div>
+
+                <!-- MENU ITEMS -->
+                <nav id="sidebar">
+                    <div class="row">
+                        <div class="col">
+                            <div class="accordion" id="accordionExample">
+                                
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                href="#card-articulos" aria-expanded="false"
+                                                aria-controls="collapseOne">
+                                                Categoria
+                                            </button>
+                                        </h5>
+                                    </div>
+
+                                    <div id="card-articulos" class="collapse show"
+                                        aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div *ngFor="let item of menuTipos">
+                                                <mat-checkbox (click)="filtroCheckbox(item.tipo)">{{item.tipo}}</mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                href="#card-marcas" aria-expanded="false"
+                                                aria-controls="collapseOne">
+                                                Marcas
+                                            </button>
+                                        </h5>
+                                    </div>
+        
+                                    <div id="card-marcas" class="collapse show"
+                                        aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div *ngFor="let item of menuMarcas">
+                                                <mat-checkbox (click)="filtroCheckbox(item.marca)">{{item.marca}}</mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+
+            <!-- ARTICULOS -->
+            <div class="col articulos">
+                <div class="row articles">
+                    <ng-container
+                        *ngFor="let item of articulos | paginate: { itemsPerPage: 5, currentPage: paginaActual }">
+                        <div class="col col-12 col-md-6 col-lg-4 articleMaterial">
+                            <article>
+                                <h2 class="nombre">{{item.nombre}}</h2>
+
+                                <div>
+                                    <img class="articulo img-fluid" [attr.src]="'assets/img/' + item.imagen">
+                                </div>
+
+                                <div class="card-content">
+                                    <div class="precio">{{item.precio}}€</div>
+                                    <button class="btn btn-outline-dark d-block mx-auto" routerLink="/tienda/articulo/{{item.k}}">Ver detalle</button>
+                                </div>
+                            </article>
+                        </div>
+                    </ng-container>
+                </div>
+
+                
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <pagination-controls (pageChange)="paginaActual = $event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+
+            <app-banner-publicidad></app-banner-publicidad>
+
+        </div>
+    </div>
+</section>

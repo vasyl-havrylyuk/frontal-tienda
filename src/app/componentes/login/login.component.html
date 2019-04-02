@@ -1,0 +1,30 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 col-md-8 col-lg-5 d-block mx-auto">
+          <form id="login" method="post" (submit)="autenticar($event)">
+              <h1 class="text-center my-4">Login</h1>
+              <div class="form-group">
+                <label for="usuario" class="lead control-label">Usuario</label>
+                <input type="text" id="usuario" name="usuario" class="form-control" placeholder="p. ej:. pepitoPerez" required>
+              </div>
+        
+              <div class="form-group">
+                <label for="password" class="lead control-label">Contraseña</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="p. ej:. ******" required>
+              </div>
+              
+              <div *ngIf="loginIncorrecto" class="text-danger mb-3">
+                El usuario y/o contraseña incorrectos
+              </div>
+
+              <input type="submit" class="btn btn-outline-success d-block mx-auto" id="login" name="login" value="Ingresar">
+        
+              <div class="text-center">
+                ¿No tienes cuenta? <a routerLink="/signup">Registrate</a>!
+              </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</section>
