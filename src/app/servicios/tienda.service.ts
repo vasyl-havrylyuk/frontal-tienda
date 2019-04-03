@@ -10,7 +10,7 @@ export class TiendaService {
   constructor(private http: HttpClient) { }
 
   getArticulos(): Observable<any[]> {
-    return this.http.get<any[]>('/php/datos.php?articulos');
+    return this.http.get<any[]>('/admin/get_JSON_Articulos');
   }
 
   getDetalleArticulo(k): Observable<any[]> {
