@@ -10,6 +10,6 @@ export class RegistroService {
   constructor(private http: HttpClient, private router: Router) {  }
 
   registrarUsuario(formulario) {
-    return this.http.post<Registro>('/php/registro.php', {formulario});
+    return this.http.post<Registro>('/admin/registro', {formulario});
   }
 }

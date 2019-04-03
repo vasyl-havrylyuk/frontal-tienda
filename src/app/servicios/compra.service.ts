@@ -16,7 +16,7 @@ export class CompraService {
   }
 
   procesarCompra(carrito) {
-    return this.http.post<Compra>('/php/compra.php', {carrito});
+    return this.http.post<Compra>('/admin/compra', {carrito});
   }
 
 }

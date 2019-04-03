@@ -27,9 +27,14 @@ export class TiendaComponent implements OnInit {
       this.articulosFiltrados = response;
     });
 
+
+
     this.tiendaService.getMenuItems('tipos').subscribe(response => {this.menuTipos = response; });
     this.tiendaService.getMenuItems('marcas').subscribe(response => {this.menuMarcas = response; });
   }
+
+
+
 
   ordenar(event: any) {
     const orden = event.target.value;

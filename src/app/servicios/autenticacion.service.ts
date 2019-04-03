@@ -15,13 +15,13 @@ export class AutenticacionService {
 
 
   autenticar(usuario, password) {
-    return this.http.post<Autenticacion>('/php/autenticacion.php', {usuario, password});
+    return this.http.post<Autenticacion>('/admin/autenticacion', {usuario, password});
   }
 
 
   /*  Verificamos si el usuario está logueado  */
   estaAutenticado() {
-    return this.http.get<Autenticacion>('/php/autenticacion.php?comprobarLogin');
+    return this.http.get<Autenticacion>('/admin/comprobarLogin');
   }
 
 }

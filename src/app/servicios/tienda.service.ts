@@ -6,21 +6,22 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 
+
 export class TiendaService {
   constructor(private http: HttpClient) { }
 
   getArticulos(): Observable<any[]> {
-    return this.http.get<any[]>('/admin/get_JSON_Articulos');
+    return this.http.get<any[]>('/admin/json_getArticulos');
   }
 
   getDetalleArticulo(k): Observable<any[]> {
-    return this.http.get<any[]>('/php/datos.php?detalleArticulo=' + k);
+    return this.http.get<any[]>('/admin/json_getDetalleArticulo/' + k);
   }
 
   getMenuItems(apartado: string) {
     switch (apartado) {
-      case 'tipos': return this.http.get<any[]>('/php/datos.php?menuTipos');
-      case 'marcas': return this.http.get<any[]>('/php/datos.php?menuMarcas');
+      case 'tipos': return this.http.get<any[]>('/admin/json_getCategorias');
+      case 'marcas': return this.http.get<any[]>('/admin/json_getMarcas');
     }
   }
 }

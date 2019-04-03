@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './componentes/home/home.component';
 import { TiendaComponent } from './componentes/tienda/tienda.component';
 import { DetalleArticuloComponent } from 'src/app/componentes/detalle-articulo/detalle-articulo.component';
-import { RutinasComponent } from './componentes/rutinas/rutinas.component';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -14,7 +13,6 @@ const routes: Routes = [
   { path: '', component:  HomeComponent },
   { path: 'tienda', component:  TiendaComponent },
   { path: 'tienda/articulo/:k', component:  DetalleArticuloComponent },
-  { path: 'rutinas', component:  RutinasComponent },
   { path: 'tienda/carrito', component:  CarritoComponent },
   { path: 'login/:destino', component:  LoginComponent },
   { path: 'signup', component:  SignupComponent },

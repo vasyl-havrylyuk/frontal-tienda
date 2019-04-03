@@ -11,10 +11,12 @@ a.active {
     justify-content: center;
 
     .btn {
+        
         display: flex;
         justify-content: center;
         align-items: center;
         color: #ffffff;
+        cursor: pointer;
         
         background: #0d0211;
         border:1px solid rgb(108, 20, 167);

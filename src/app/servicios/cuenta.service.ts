@@ -8,9 +8,8 @@ export class CuentaService {
 
   constructor(private http: HttpClient) {  }
 
-
   cerrarSesion() {
-    return this.http.post('/php/cuenta.php', {'cerrarSesion': ''} );
+    return this.http.get('/admin/cerrarsesion');
   }
 }
 

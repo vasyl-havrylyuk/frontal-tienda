@@ -17,7 +17,6 @@ import { LoginComponent } from './componentes/login/login.component';
 import { BannerPublicidadComponent } from './componentes/banner-publicidad/banner-publicidad.component';
 import { MaterialModule } from './modulos/material.module';
 import { DetalleArticuloComponent } from './componentes/detalle-articulo/detalle-articulo.component';
-import { RutinasComponent } from './componentes/rutinas/rutinas.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { SignupComponent } from './componentes/signup/signup.component';
 import { CuentaComponent } from './componentes/cuenta/cuenta.component';
@@ -35,7 +34,6 @@ import { CuentaComponent } from './componentes/cuenta/cuenta.component';
     LoginComponent,
     BannerPublicidadComponent,
     DetalleArticuloComponent,
-    RutinasComponent,
     CarritoComponent,
     SignupComponent,
     CuentaComponent
