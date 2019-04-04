@@ -5,6 +5,8 @@ section {
         position:relative;
 
         .col.menu {
+
+
             .container {
                 display: block;
                 position: relative;
@@ -87,6 +89,21 @@ section {
                 .card {
                     .card-header {
                         background: #2b0238 !important;
+                        position: relative;
+
+                        span.eliminarFiltros {
+                            cursor: pointer;
+                            display: none;
+                            position: absolute;
+                            background: #933939e6;
+                            padding: 1px 4px;
+                            color: #fff;
+                            left: calc(100% - 1.09rem);
+                            top: 0;
+                            border-radius: 0 3px 0 3px;
+                            border-left: 1px solid #a37fbc;
+                            border-bottom: 1px solid #dca7ff;
+                        }
                     }
 
 
@@ -101,7 +118,8 @@ section {
 
         .col.articulos {
             .wrapperPaginacion {
-                background: rgb(185, 185, 185);
+                color: #000;
+                background: #52368033;
                 padding: 5px 0;   
                 border-bottom-left-radius: 5px;
                 border-bottom-right-radius: 5px;

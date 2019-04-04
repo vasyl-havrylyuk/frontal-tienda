@@ -1,5 +1,6 @@
 <section>
     <div class="container">
+
         <div class="row">
             <div class="col col-12 col-md-4 col-lg-3 menu">
 
@@ -26,7 +27,10 @@
                             <div class="accordion" id="accordionExample">
                                 
                                 <div class="card">
+                                    
                                     <div class="card-header" id="headingOne">
+                                        <span (click)="eliminarFiltros('categoria')" class="eliminarFiltros" title="Eliminar filtros"><i class="fas fa-times"></i></span>
+
                                         <h5 class="mb-0">
                                             <button class="btn btn-link" type="button" data-toggle="collapse"
                                                 href="#card-articulos" aria-expanded="false"
@@ -43,7 +47,7 @@
                                             <div *ngFor="let item of menuTipos">
                 
                                                 <label class="container">{{item.tipo}}
-                                                    <input type="radio"  name="seleccion" (click)="filtrar('tipo', item.tipo)">
+                                                    <input type="radio" class="categoria" name="tipo" (click)="filtrar('tipo', item.tipo)">
                                                     <span class="checkmark"></span>
                                                 </label>
 
@@ -70,7 +74,7 @@
                                             <div *ngFor="let item of menuMarcas">
                                                 
                                                 <label class="container">{{item.marca}}
-                                                    <input type="radio" name="seleccion" (click)="filtrar('marca', item.marca)">
+                                                    <input type="radio" class="marca" name="marca" (click)="filtrar('marca', item.marca)">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 
@@ -89,7 +93,7 @@
             <!-- ARTICULOS -->
             <div class="col articulos">
                 <div class="row">
-                    <div class="col-4 ml-auto">
+                    <div class="col-12 col-md-8 col-lg-5 col-xl-4 ml-auto">
                         <div class="wrapperPaginacion text-center">
                             <span>Mostrar </span>
 
