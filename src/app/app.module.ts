@@ -14,7 +14,6 @@ import { TiendaComponent } from './componentes/tienda/tienda.component';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { LoginComponent } from './componentes/login/login.component';
-import { BannerPublicidadComponent } from './componentes/banner-publicidad/banner-publicidad.component';
 import { MaterialModule } from './modulos/material.module';
 import { DetalleArticuloComponent } from './componentes/detalle-articulo/detalle-articulo.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
@@ -32,7 +31,6 @@ import { CuentaComponent } from './componentes/cuenta/cuenta.component';
     ContactoComponent,
     HeaderComponent,
     LoginComponent,
-    BannerPublicidadComponent,
     DetalleArticuloComponent,
     CarritoComponent,
     SignupComponent,

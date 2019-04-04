@@ -13,7 +13,10 @@ export class TiendaComponent implements OnInit {
   menuCheckbox = [];
   articulos = [];
   articulosFiltrados = [];
+  paginacion: number = 5;
   paginaActual: number;
+  
+  
 
   constructor(private tiendaService: TiendaService, private route: ActivatedRoute) { }
 
@@ -26,8 +29,6 @@ export class TiendaComponent implements OnInit {
       this.articulos = response;
       this.articulosFiltrados = response;
     });
-
-
 
     this.tiendaService.getMenuItems('tipos').subscribe(response => {this.menuTipos = response; });
     this.tiendaService.getMenuItems('marcas').subscribe(response => {this.menuMarcas = response; });
@@ -49,21 +50,17 @@ export class TiendaComponent implements OnInit {
   }
 
 
-  filtroCheckbox(item) {
-    this.articulos = this.menuCheckbox;
+  filtrar(apartado, item) {
+    let auxArray = [];
 
-    for (let i = 0; i < this.articulosFiltrados.length; i++) {
-      if (this.articulosFiltrados[i].tipo.indexOf(item) !== -1 || this.articulosFiltrados[i].marca.indexOf(item) !== -1) {
-        if (this.menuCheckbox.indexOf(this.articulosFiltrados[i]) === -1) {
-          this.menuCheckbox.push(this.articulosFiltrados[i]);
-        } else {
-          this.menuCheckbox.splice(this.menuCheckbox.indexOf(this.articulosFiltrados[i]), 1);
-        }
-      }
+    if (apartado === 'tipo') {
+      this.articulos = this.articulosFiltrados.filter(response => response.tipo.indexOf(item) !== -1);
     }
 
-    if (this.menuCheckbox.length === 0) {
-      this.articulos = this.articulosFiltrados;
+
+    if (apartado === 'marca') {
+      this.articulos = this.articulosFiltrados.filter(response => response.marca.indexOf(item) !== -1);
     }
+
   }
 }
