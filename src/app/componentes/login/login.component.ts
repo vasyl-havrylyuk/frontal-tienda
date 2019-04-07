@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginIncorrecto = false;
+  mensajeError: String;
 
   constructor(private autenticacionService: AutenticacionService, private route: ActivatedRoute, private router: Router) { }
 
@@ -27,21 +28,31 @@ export class LoginComponent implements OnInit {
         const destino = response2['destino'];
 
         if (response.autenticado) {
-          if (response.adminAutenticado) {
-            window.location.href = '/admin';
-          } else {
-            switch (destino) {
-              case 'carrito':
-                this.router.navigate(['/tienda/' + destino]);
-                break;
 
-                case 'cuenta':
-                  this.router.navigate(['/' + destino]);
+          if (response.usuarioActivado) {
+            if (response.adminAutenticado) {
+              window.location.href = '/admin';
+            } else {
+              switch (destino) {
+                case 'carrito':
+                  this.router.navigate(['/tienda/' + destino]);
                   break;
+
+                  case 'cuenta':
+                    this.router.navigate(['/' + destino]);
+                    break;
+              }
             }
+          } else {
+            this.loginIncorrecto = true;
+            this.mensajeError = 'No has activado tu cuenta';
           }
+
+
+
         } else {
           this.loginIncorrecto = true;
+          this.mensajeError = 'El usuario y/o contraseña incorrectos';
         }
 
       });

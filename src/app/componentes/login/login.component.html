@@ -15,7 +15,7 @@
               </div>
               
               <div *ngIf="loginIncorrecto" class="text-danger mb-3">
-                El usuario y/o contraseña incorrectos
+                {{mensajeError}}
               </div>
 
               <input type="submit" class="btn btn-outline-success d-block mx-auto" id="login" name="login" value="Ingresar">
