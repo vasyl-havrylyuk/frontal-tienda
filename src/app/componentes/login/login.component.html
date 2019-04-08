@@ -14,8 +14,8 @@
                 <input type="password" id="password" name="password" class="form-control" placeholder="p. ej:. ******" required>
               </div>
               
-              <div *ngIf="loginIncorrecto" class="text-danger mb-3">
-                {{mensajeError}}
+              <div *ngIf="mensaje" class="text-danger mb-3">
+                {{mensaje}}
               </div>
 
               <input type="submit" class="btn btn-outline-success d-block mx-auto" id="login" name="login" value="Ingresar">

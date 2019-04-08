@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegistroService } from 'src/app/servicios/registro.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,7 @@ export class SignupComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router) { }
 
   ngOnInit() {
-      this.establecerValidaciones();
+    this.establecerValidaciones();
   }
 
   establecerValidaciones() {
@@ -42,7 +43,12 @@ export class SignupComponent implements OnInit {
 
       this.registroService.registrarUsuario(this.formulario.value).subscribe(response => {
         if (response.registrado) {
-            this.router.navigate(['/cuenta']);
+          
+          $('#envioMensaje').modal('show');
+
+          setTimeout(function(){
+            window.location.href = "/login/cuenta";
+          }, 2500);
         }
       });
   }

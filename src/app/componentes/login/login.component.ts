@@ -9,8 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginIncorrecto = false;
-  mensajeError: String;
+  mensaje = '';
 
   constructor(private autenticacionService: AutenticacionService, private route: ActivatedRoute, private router: Router) { }
 
@@ -44,15 +43,13 @@ export class LoginComponent implements OnInit {
               }
             }
           } else {
-            this.loginIncorrecto = true;
-            this.mensajeError = 'No has activado tu cuenta';
+            this.mensaje = 'No has activado tu cuenta';
           }
 
 
 
         } else {
-          this.loginIncorrecto = true;
-          this.mensajeError = 'El usuario y/o contraseña incorrectos';
+          this.mensaje = 'El usuario y/o contraseña incorrectos';
         }
 
       });
