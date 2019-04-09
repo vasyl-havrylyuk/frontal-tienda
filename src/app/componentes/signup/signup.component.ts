@@ -38,14 +38,13 @@ export class SignupComponent implements OnInit {
       this.submitted = true;
 
       if (this.formulario.invalid) {
-          return;
+        return;
       }
+
+      $('#envioMensaje').modal('show');
 
       this.registroService.registrarUsuario(this.formulario.value).subscribe(response => {
         if (response.registrado) {
-          
-          $('#envioMensaje').modal('show');
-
           setTimeout(function(){
             window.location.href = "/login/cuenta";
           }, 2500);
