@@ -2,9 +2,14 @@ nav {
     background: #2b0238 !important;
 }
 
-a.active {
+.navbar-brand.nombreWeb {
     color:rgb(235, 235, 235) !important;
     background: #372147;
+}
+
+a.active {
+    color: #fff !important;
+    background: #68619b80;
 }
 
 .iconsBtnWrapper {
