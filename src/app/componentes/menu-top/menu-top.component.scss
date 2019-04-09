@@ -40,5 +40,12 @@ a.active {
         margin-left: 5px;
     }
 
+}
 
+
+@media (min-width: 990px) { 
+    .nav-item {
+       margin-top:0px !important;
+       margin-bottom:0px !important;
+    }
 }

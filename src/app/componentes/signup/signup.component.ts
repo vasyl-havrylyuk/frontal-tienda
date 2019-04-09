@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
       this.registroService.registrarUsuario(this.formulario.value).subscribe(response => {
         if (response.registrado) {
           setTimeout(function() {
-            window.location.href = '/login/cuenta';
+            document.location.href = '/login/cuenta';
           }, 3500);
         }
       });
