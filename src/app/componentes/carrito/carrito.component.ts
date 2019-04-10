@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { Router } from '@angular/router';
 import { CompraService } from 'src/app/servicios/compra.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-carrito',
@@ -12,9 +13,10 @@ export class CarritoComponent implements OnInit {
   carrito = [];
   totalCarrito = 0;
 
-  constructor(private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router) { }
+  constructor(private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Carrito');
     this.carrito = this.getCarrito();
     this.getTotalCarrito();
   }

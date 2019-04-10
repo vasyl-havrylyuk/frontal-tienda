@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { MenuTopComponent } from './componentes/menu-top/menu-top.component';
-import { HomeComponent } from './componentes/home/home.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { TiendaComponent } from './componentes/tienda/tienda.component';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
@@ -27,7 +26,6 @@ import { LogoTopComponent } from './logo-top/logo-top.component';
   declarations: [
     AppComponent,
     MenuTopComponent,
-    HomeComponent,
     FooterComponent,
     TiendaComponent,
     ContactoComponent,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TiendaService } from '../../servicios/tienda.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detalle-articulo',
@@ -12,10 +13,11 @@ export class DetalleArticuloComponent implements OnInit {
   cantidad = 1;
   carrito = [];
 
-  constructor(private tiendaService: TiendaService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private tiendaService: TiendaService, private route: ActivatedRoute, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
     this.getDetalleArticulo();
+    // Establecemos el titulo de la pagina dentro del observable getDetalleArticulo
   }
 
   getDetalleArticulo() {
@@ -24,6 +26,7 @@ export class DetalleArticuloComponent implements OnInit {
 
       this.tiendaService.getDetalleArticulo(k).subscribe(response => {
         this.detalleArticulo = response;
+        this.titleService.setTitle(this.detalleArticulo[0].nombre);
       });
     });
   }

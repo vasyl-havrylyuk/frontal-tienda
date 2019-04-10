@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
   mensaje = '';
 
-  constructor(private autenticacionService: AutenticacionService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private autenticacionService: AutenticacionService, private route: ActivatedRoute, private router: Router, private titleService: Title) { }
 
-  ngOnInit() {  }
+  ngOnInit() {
+    this.titleService.setTitle('Login');
+  }
 
   autenticar(event: any) {
     event.preventDefault();

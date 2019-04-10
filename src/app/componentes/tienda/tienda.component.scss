@@ -104,6 +104,12 @@ section {
                             border-left: 1px solid #a37fbc;
                             border-bottom: 1px solid #dca7ff;
                         }
+
+                        @media (max-width: 768px) {
+                            h5 {
+                                text-align: center;
+                            }
+                        }
                     }
 
 
@@ -168,6 +174,27 @@ section {
                     }
                 }
             }
+        }
+
+
+        .my-pagination /deep/ {
+            .ngx-pagination {
+                padding-left:0;
+    
+                .current {
+                    background: #333;
+                }
+            }
+
+            /*
+            .ngx-pagination a {
+                text-decoration: none;
+                font-size: 25px;
+            }
+
+            .ngx-pagination a::before {
+                content: '⬅';
+            }*/
         }
     }
 }

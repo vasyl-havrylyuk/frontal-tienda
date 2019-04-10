@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { Router } from '@angular/router';
 import { CuentaService } from 'src/app/servicios/cuenta.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cuenta',
@@ -11,9 +12,10 @@ import { CuentaService } from 'src/app/servicios/cuenta.service';
 export class CuentaComponent implements OnInit {
   autenticado: boolean;
 
-  constructor(private autenticacionService: AutenticacionService, private cuentaService: CuentaService, private router: Router) { }
+  constructor(private autenticacionService: AutenticacionService, private cuentaService: CuentaService, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Detalles de la cuenta');
     this.estaAutenticado();
   }
 

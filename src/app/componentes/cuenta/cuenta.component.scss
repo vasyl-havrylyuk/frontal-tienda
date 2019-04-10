@@ -1,7 +1,13 @@
 section {
     .container {
+
+        @media (max-width: 500px) {
+            h2 {
+                font-size: 7vw;
+            }
+        }
+
         .row.controles {
-            background: #e9e9e9;
             
             .col.controles {
                 display: flex;
@@ -12,6 +18,12 @@ section {
                     background: #2b0238;
                     border: 1px solid black;
                     cursor:pointer;
+                    transition-duration: 0s;
+
+                    &:hover {
+                        background: #0e003bb3;
+                        border: 1px solid #1c2d5c99;
+                    }
                 }
 
                 .btn:nth-child(2) {

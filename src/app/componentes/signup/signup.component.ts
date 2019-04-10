@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegistroService } from 'src/app/servicios/registro.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 declare var $: any;
 
 @Component({
@@ -14,9 +15,10 @@ export class SignupComponent implements OnInit {
   formulario: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Registro');
     this.establecerValidaciones();
   }
 

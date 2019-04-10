@@ -2,15 +2,77 @@
   <div class="container">
     <div class="row controles">
       <div class="col controles">
-        <div class="btn btn-primary disabled">Modificar mis datos (en desarrollo)</div>
-        <div class="btn btn-primary disabled">Ver histórico (en desarrollo)</div>
         <div class="btn btn-primary" (click)="cerrarSesion()">Cerrar sesión</div>
       </div>
     </div>
 
-    <h2>Detalles de tu cuenta 'nombre de usuario'</h2>
-    <p>Lorem ipsum dolor sit.</p>
-    <p>Lorem ipsum dolor sit Lorem ipsum dolor sit amet..</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam ullam soluta possimus, facere officia, ab delectus perspiciatis voluptates commodi molestias neque eum sit dicta. Omnis doloribus illum ipsa. Tempore, ipsa! Dignissimos esse alias autem voluptas nulla dolore perferendis exercitationem?</p>
+    <h2>Bienvenido Vasyl Havrylyuk</h2>
+
+    <hr class="my-3">
+    
+    <div class="row">
+      <div class="col-lg-4">
+        <form action="" method="post">
+          <div class="form-group row">
+              <label for="usuario" class="col-sm-3 col-form-label">Usuario</label>
+              
+              <div class="col">
+                  <input type="text" value="" name="usuario" class="form-control" id="usuario">
+              </div>
+          </div>
+      
+          <div class="form-group row">
+              <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+              
+              <div class="col">
+                  <input type="text" value="" name="nombre" class="form-control" id="nombre">
+              </div>
+          </div>
+      
+          <div class="form-group row">
+              <label for="apellido" class="col-sm-3 col-form-label">Apellidos</label>
+              
+              <div class="col">
+                  <input type="text" value="" name="apellido" class="form-control" id="apellido">
+              </div>
+          </div>
+      
+          <div class="form-group row">
+              <label for="dni" class="col-sm-3 col-form-label">NIE / DNI</label>
+              
+              <div class="col">
+                  <input type="text" value="" name="dni" class="form-control" id="dni">
+              </div>
+          </div>
+      
+          <div class="form-group row">
+              <label for="direccion" class="col-sm-3 col-form-label">Dirección</label>
+              
+              <div class="col">
+                  <input type="text" value="" name="direccion" class="form-control" id="direccion">
+              </div>
+          </div>
+      
+          <div class="form-group row">
+              <label for="email" class="col-sm-3 col-form-label">Email</label>
+              
+              <div class="col">
+                  <input type="email" value="" name="email" class="form-control" id="email">
+              </div>
+          </div>
+      
+          <div class="form-group row">
+              <div class="col-sm-10 offset-sm-3">
+                  <button type="submit" class="btn btn-outline-primary">Actualizar cuenta</button>
+              </div>
+          </div>
+        </form>
+      </div>
+  
+      <div class="col offset-lg-1">
+        <h4>Tu historial de pedidos</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos totam eius pariatur. Delectus, fugiat consequuntur.</p>
+      </div>
+    </div>
   </div>
 </section>

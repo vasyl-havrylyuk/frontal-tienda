@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TiendaService } from 'src/app/servicios/tienda.service';
 import { ActivatedRoute } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tienda',
@@ -20,7 +21,7 @@ export class TiendaComponent implements OnInit {
 
 
 
-  constructor(private tiendaService: TiendaService, breakpointObserver: BreakpointObserver, private route: ActivatedRoute) { 
+  constructor(private tiendaService: TiendaService, breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private titleService: Title) { 
     breakpointObserver.observe(['(max-width: 768px)']).subscribe(response => {
       if (response.matches) {
         this.modificarMenuLateral('minimize');
@@ -33,6 +34,7 @@ export class TiendaComponent implements OnInit {
 
 
   ngOnInit() {
+    this.titleService.setTitle('Tienda');
     this.getArticulos();
   }
 
