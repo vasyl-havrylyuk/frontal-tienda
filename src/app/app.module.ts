@@ -19,7 +19,7 @@ import { DetalleArticuloComponent } from './componentes/detalle-articulo/detalle
 import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { SignupComponent } from './componentes/signup/signup.component';
 import { CuentaComponent } from './componentes/cuenta/cuenta.component';
-import { LogoTopComponent } from './logo-top/logo-top.component';
+import { LogoTopComponent } from './componentes/logo-top/logo-top.component';
 
 
 @NgModule({

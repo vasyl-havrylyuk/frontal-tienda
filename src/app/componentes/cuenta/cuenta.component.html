@@ -6,71 +6,71 @@
       </div>
     </div>
 
-    <h2>Bienvenido Vasyl Havrylyuk</h2>
+    <h2>Bienvenido {{ usuario.sNombre + " " + usuario.sApellido }}</h2>
 
     <hr class="my-3">
     
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-lg-5">
         <form action="" method="post">
           <div class="form-group row">
-              <label for="usuario" class="col-sm-3 col-form-label">Usuario</label>
+              <label for="usuario" class="col-sm-4 col-form-label">Usuario</label>
               
               <div class="col">
-                  <input type="text" value="" name="usuario" class="form-control" id="usuario">
+                  <input type="text" [value]="usuario.sUser" name="usuario" class="form-control" id="usuario">
               </div>
           </div>
       
           <div class="form-group row">
-              <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+              <label for="nombre" class="col-sm-4 col-form-label">Nombre</label>
               
               <div class="col">
-                  <input type="text" value="" name="nombre" class="form-control" id="nombre">
+                  <input type="text" [value]="usuario.sNombre" name="nombre" class="form-control" id="nombre">
               </div>
           </div>
       
           <div class="form-group row">
-              <label for="apellido" class="col-sm-3 col-form-label">Apellidos</label>
+              <label for="apellido" class="col-sm-4 col-form-label">Apellidos</label>
               
               <div class="col">
-                  <input type="text" value="" name="apellido" class="form-control" id="apellido">
+                  <input type="text" [value]="usuario.sApellido" name="apellido" class="form-control" id="apellido">
               </div>
           </div>
       
           <div class="form-group row">
-              <label for="dni" class="col-sm-3 col-form-label">NIE / DNI</label>
+              <label for="dni" class="col-sm-4 col-form-label">NIE / DNI</label>
               
               <div class="col">
-                  <input type="text" value="" name="dni" class="form-control" id="dni">
+                  <input type="text" [value]="usuario.sDni" name="dni" class="form-control" id="dni">
               </div>
           </div>
       
           <div class="form-group row">
-              <label for="direccion" class="col-sm-3 col-form-label">Dirección</label>
+              <label for="direccion" class="col-sm-4 col-form-label">Dirección</label>
               
               <div class="col">
-                  <input type="text" value="" name="direccion" class="form-control" id="direccion">
+                  <input type="text" [value]="usuario.sDireccion" name="direccion" class="form-control" id="direccion">
               </div>
           </div>
       
           <div class="form-group row">
-              <label for="email" class="col-sm-3 col-form-label">Email</label>
+              <label for="email" class="col-sm-4 col-form-label">Email</label>
               
               <div class="col">
-                  <input type="email" value="" name="email" class="form-control" id="email">
+                  <input type="email" [value]="usuario.sEmail" name="email" class="form-control" id="email">
               </div>
           </div>
       
           <div class="form-group row">
-              <div class="col-sm-10 offset-sm-3">
+              <div class="col-sm-10 offset-sm-4">
                   <button type="submit" class="btn btn-outline-primary">Actualizar cuenta</button>
               </div>
           </div>
         </form>
       </div>
   
-      <div class="col offset-lg-1">
-        <h4>Tu historial de pedidos</h4>
+      <div class="col pl-4">
+        <h4 class="lead pedidos">Tu historial de pedidos</h4>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos totam eius pariatur. Delectus, fugiat consequuntur.</p>
       </div>
     </div>

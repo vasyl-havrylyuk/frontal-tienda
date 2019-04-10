@@ -11,12 +11,14 @@ import { Title } from '@angular/platform-browser';
 })
 export class CuentaComponent implements OnInit {
   autenticado: boolean;
+  usuario = [];
 
   constructor(private autenticacionService: AutenticacionService, private cuentaService: CuentaService, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
     this.titleService.setTitle('Detalles de la cuenta');
     this.estaAutenticado();
+    this.getDetallesUsuario();
   }
 
 
@@ -31,6 +33,11 @@ export class CuentaComponent implements OnInit {
     });
   }
 
+  getDetallesUsuario() {
+    this.cuentaService.getDetallesUsuario().subscribe(response => {
+      this.usuario = response;
+    });
+  }
 
   cerrarSesion() {
     this.cuentaService.cerrarSesion().subscribe(response => {
