@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { Router } from '@angular/router';
 import { CuentaService } from 'src/app/servicios/cuenta.service';
@@ -42,47 +42,62 @@ export class CuentaComponent implements OnInit {
 
 
   actualizarCuenta(event: any) {
-    let $usuario = $('#usuario');
-    let $nombre = $('#nombre');
-    let $apellido = $('#apellido');
-    let $dni = $('#dni');
-    let $direccion = $('#direccion');
-    let $email = $('#email');
+    $('input').click(function(){$(this).removeClass('is-invalid');});
+    $('input').blur(function(){$(this).removeClass('is-invalid');});
+
+    let errores = false;
+
+    if ($('#usuario').val() === '') {
+      $('#usuario').addClass('is-invalid');
+      errores = true;
+    }
+
+    if ($('#nombre').val() === '') {
+      $('#nombre').addClass('is-invalid');
+      errores = true;
+    }
+
+    if ($('#apellido').val() === '') {
+      $('#apellido').addClass('is-invalid');
+      errores = true;
+    }
+
+    if ($('#dni').val() === '' || !/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i.test($('#dni').val().toString()) && !/^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i.test($('#dni').val().toString())) {
+      $('#dni').addClass('is-invalid');
+      errores = true;
+    }
+
+    if ($('#direccion').val() === '') {
+      $('#direccion').addClass('is-invalid');
+      errores = true;
+    }
+
+    if ($('#email').val() === '' || !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test($('#email').val().toString())) {
+      $('#email').addClass('is-invalid');
+      errores = true;
+    }
+
+
+    // LLAMAMOS AL METODO ACTUALIZAR CUENTA DEL SERVICIO EN CASO DE QUE TODO ESTE BIEN
+    if (!errores) {
+      let data = {
+        'usuario': $('#usuario').val(),
+        'nombre': $('#nombre').val(),
+        'apellido': $('#apellido').val(),
+        'dni': $('#dni').val(),
+        'direccion': $('#direccion').val(),
+        'email': $('#email').val()
+      };
+
+
+      this.cuentaService.actualizarCuenta(data).subscribe(response => {
+        if (response.cuentaActualizada) {
+          alert('Has actualizado correctamente tu cuenta');
+        }
+      });
+
+    }
     
-
-    
-    if ($usuario.val() == "") {
-        $usuario.addClass('is-invalid');
-        event.preventDefault();
-    }
-
-    if ($nombre.val() == "") {
-        $nombre.addClass('is-invalid');
-        event.preventDefault();
-    }
-
-    if ($apellido.val() == "") {
-        $apellido.addClass('is-invalid');
-        event.preventDefault();
-    }
-    
-    // ERROR ARREGLAR
-    if ($dni.val() == "" || !/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i.test($dni.val()) && !/^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i.test($dni.val())) {
-        $dni.addClass('is-invalid');
-        event.preventDefault();
-    }
-
-    if ($direccion.val() == "") {
-        $direccion.addClass('is-invalid');
-        event.preventDefault();
-    }
-
-    if ($email.val() == "") {
-        $email.addClass('is-invalid');
-        event.preventDefault();
-    }
-
-
   }
 
 
