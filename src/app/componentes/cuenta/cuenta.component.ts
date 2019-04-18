@@ -89,7 +89,6 @@ export class CuentaComponent implements OnInit {
         'email': $('#email').val()
       };
 
-
       this.cuentaService.actualizarCuenta(data).subscribe(response => {
         if (response.cuentaActualizada) {
           alert('Has actualizado correctamente tu cuenta');
@@ -97,7 +96,7 @@ export class CuentaComponent implements OnInit {
       });
 
     }
-    
+
   }
 
 
