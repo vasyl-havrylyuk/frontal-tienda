@@ -1,24 +1,78 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { Router } from '@angular/router';
 import { CompraService } from 'src/app/servicios/compra.service';
 import { Title } from '@angular/platform-browser';
+import { reject } from 'q';
+
+declare let paypal: any;
 
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.scss']
 })
-export class CarritoComponent implements OnInit {
+export class CarritoComponent implements OnInit, AfterViewChecked {
   carrito = [];
-  totalCarrito = 0;
+  logueado: boolean = false;
+
+  addScript: boolean = false;
+  paypalLoad: boolean = true;
+
+  finalAmount: number = this.getTotalCarrito();
+
+  paypalConfig = {
+    env: 'sandbox',
+    client: {
+      sandbox: 'AdLTFQnKvS1JkakBg2cfBd2C3RF78ahhzPMsP8kbryj6rvg4jnZ10X1XiQbco0aiq3hyDa1QgoB-mbN6',
+      production: 'EJPF5gIDfWmERlCKBvca-PxvZSCg9Awn2EV9z7sYdVriXEtGrrmMQyOGuLZWYC5bIERPIQ4RmYYlxJHD'
+    },
+    commit: true,
+
+    payment: (data, actions) => {
+      return actions.payment.create({
+        payment: {
+          transactions: [
+            { amount: { total: this.finalAmount, currency: 'EUR' } }
+          ]
+        }
+      });
+    },
+    
+    onAuthorize: (data, actions) => {
+      return actions.payment.execute().then((payment) => {
+        this.finalizarCompra();
+      })
+    }
+  };
+
+  ngAfterViewChecked(): void {
+    if (!this.addScript) {
+      this.addPaypalScript().then(() => {
+        paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
+        this.paypalLoad = false;
+      })
+    }
+  }
+
+  
+  addPaypalScript() {
+    this.addScript = true;
+    return new Promise((resolve, reject) => {
+      let scripttagElement = document.createElement('script');
+      scripttagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
+      scripttagElement.onload = resolve;
+      document.body.appendChild(scripttagElement);
+    })
+  }
+
 
   constructor(private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
     this.titleService.setTitle('Carrito');
     this.carrito = this.getCarrito();
-    this.getTotalCarrito();
+    this.estaAutenticado();
   }
 
   getCarrito() {
@@ -31,10 +85,14 @@ export class CarritoComponent implements OnInit {
 
   getTotalCarrito() {
     this.carrito = this.getCarrito();
+    let tmp = 0;
 
     for (let i = 0; i < this.carrito.length; i++) {
-      this.totalCarrito += parseFloat(this.carrito[i].totalArticulo);
+      tmp += parseFloat(this.carrito[i].totalArticulo);
     }
+
+    return tmp;
+
   }
 
   eliminarDelCarrito(articulo) {
@@ -68,24 +126,30 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  finalizarCompra() {
-    this.carrito = this.getCarrito();
 
+  finalizarCompra() {
+    if (this.carritoValido()) {
+      this.compraService.procesarCompra(this.carrito).subscribe(response2 => {
+        if (response2.correcto) {
+          this.carrito = [];
+          this.setCarrito(this.carrito);
+          alert('Compra procesada correctamente');
+          this.router.navigate(['/cuenta']);
+        }
+      });
+    }
+  }
+
+  estaAutenticado() {
     this.autenticacionService.estaAutenticado().subscribe(response => {
       if (response.autenticado) {
-        if (this.carritoValido()) {
-          this.compraService.procesarCompra(this.carrito).subscribe(response2 => {
-            if (response2.correcto) {
-              this.carrito = [];
-              this.setCarrito(this.carrito);
-              alert('Compra procesada correctamente');
-              this.router.navigate(['/cuenta']);
-            }
-          });
-        }
-      } else {
-        this.router.navigate(['/login/carrito']);
+        this.logueado = true;
       }
     });
+  }
+
+
+  loguearse() {
+    this.router.navigate(['/login/carrito']);
   }
 }

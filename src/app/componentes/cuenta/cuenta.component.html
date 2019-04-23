@@ -83,7 +83,7 @@
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
               <div class="card-body">
-                <div class="table-responsive-sm">
+                <div *ngIf="historialPedidos.length >= 1" class="table-responsive-sm">
                   <table class="table">
                     <tr>
                       <th class="text-center" colspan="2">Artículo</th>
@@ -102,6 +102,11 @@
                     </tr>
                   </table>
                 </div>
+
+                <div *ngIf="historialPedidos.length == 0">
+                  Todavía no has realizado ningún pedido
+                </div>
+
               </div>
             </div>
           </div>
