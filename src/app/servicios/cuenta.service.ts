@@ -18,6 +18,12 @@ export class CuentaService {
     return this.http.post<cuenta>('/admin/actualizarCuenta', data);
   }
 
+
+  getHistorialPedidos() {
+    return this.http.get<any[]>('/admin/json_getHistorialPedidos');
+  }
+
+  
   cerrarSesion() {
     return this.http.get('/admin/cerrarsesion');
   }

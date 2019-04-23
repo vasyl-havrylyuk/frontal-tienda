@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CuentaComponent implements OnInit {
   autenticado: boolean;
   usuario = [];
+  historialPedidos = [];
 
   constructor(private autenticacionService: AutenticacionService, private cuentaService: CuentaService, private router: Router, private titleService: Title) { }
 
@@ -20,6 +21,7 @@ export class CuentaComponent implements OnInit {
     this.titleService.setTitle('Detalles de la cuenta');
     this.estaAutenticado();
     this.getDetallesUsuario();
+    this.getHistorialPedidos();
   }
 
 
@@ -99,6 +101,15 @@ export class CuentaComponent implements OnInit {
 
   }
 
+
+  getHistorialPedidos() {
+    this.cuentaService.getHistorialPedidos().subscribe(
+      response => {
+        this.historialPedidos = response
+        console.log(this.historialPedidos);
+      }
+    );
+  }
 
   cerrarSesion() {
     this.cuentaService.cerrarSesion().subscribe(response => {
