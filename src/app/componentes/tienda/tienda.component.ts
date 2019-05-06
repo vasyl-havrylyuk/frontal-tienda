@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TiendaService } from 'src/app/servicios/tienda.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Title } from '@angular/platform-browser';
 
@@ -21,7 +21,7 @@ export class TiendaComponent implements OnInit {
 
 
 
-  constructor(private tiendaService: TiendaService, breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private titleService: Title) { 
+  constructor(private router: Router, private tiendaService: TiendaService, breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private titleService: Title) { 
     breakpointObserver.observe(['(max-width: 768px)']).subscribe(response => {
       if (response.matches) {
         this.modificarMenuLateral('minimize');
@@ -63,7 +63,10 @@ export class TiendaComponent implements OnInit {
   }
 
 
-
+  verDetalle(k) {
+    this.router.navigate(['/tienda/articulo/'+k]);
+  }
+  
   filtrar(apartado, item) {
     if (apartado === 'tipo') { this.filtros.tipo = item; }
     if (apartado === 'marca') { this.filtros.marca = item; }

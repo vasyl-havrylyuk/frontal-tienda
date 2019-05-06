@@ -14,7 +14,6 @@
     
         span.nombre {
             font-size: 30px;
-            margin-left:20px;
             color: #1c0051cc;
             font-weight: bold;
             border-bottom: 1px solid #39009833;
@@ -23,17 +22,18 @@
 
 
         @media (max-width: 500px) {
-            display: block;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
             span.nombre {
-                margin-left:0;
+                margin-left: 0 !important;
             }
         }
 
         @media (max-width: 240px) {
             span.nombre {
-                font-size:10vw;
+                font-size:13vw;
             }
         }
     }

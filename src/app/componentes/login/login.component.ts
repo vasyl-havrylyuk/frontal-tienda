@@ -37,13 +37,12 @@ export class LoginComponent implements OnInit {
             } else {
               switch (destino) {
                 case 'carrito':
-                  this.router.navigate(['/tienda/' + destino]);
+                  window.location.href = "/tienda/"+destino;
                   break;
-
-                  case 'cuenta':
-                    this.router.navigate(['/' + destino]);
-                    break;
-              }
+                case 'cuenta':
+                  this.router.navigate(['/' + destino]);
+                  break;
+              } 
             }
           } else {
             this.mensaje = 'No has activado tu cuenta';

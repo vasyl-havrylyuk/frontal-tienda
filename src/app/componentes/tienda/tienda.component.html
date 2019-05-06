@@ -115,16 +115,12 @@
                     <ng-container
                         *ngFor="let item of articulos | paginate: { itemsPerPage: paginacion, currentPage: paginaActual }">
                         <div class="col col-12 col-md-6 col-lg-4 articleMaterial">
-                            <article>
-                                <h2 class="nombre">{{item.nombre}}</h2>
 
-                                <div>
-                                    <img class="articulo img-fluid" [attr.src]="'assets/img/' + item.imagen">
-                                </div>
-
-                                <div class="card-content">
-                                    <div class="precio">{{item.precio}}€</div>
-                                    <button class="btn btn-outline-dark d-block mx-auto" routerLink="/tienda/articulo/{{item.k}}">Ver detalle</button>
+                            <article class="card" (click)="verDetalle(item.k)">
+                                <div class="card-body">
+                                    <div class="imgWrapper"><img class="articulo img-fluid" [attr.src]="'assets/img/' + item.imagen"></div>
+                                    <div class="nameWrapper">{{ item.nombre }}</div>
+                                    <div class="precioWrapper">{{ item.precio }}€</div>
                                 </div>
                             </article>
                         </div>

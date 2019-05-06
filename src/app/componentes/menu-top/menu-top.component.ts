@@ -13,16 +13,27 @@ import { AutenticacionService } from '../../servicios/autenticacion.service';
 
 
 export class MenuTopComponent implements OnInit {
+  numeroArticulosCarrito: number;
+
   constructor(private autenticacionService: AutenticacionService, private router: Router) { }
 
   ngOnInit() {
     this.crearCarrito();
+    this.getNumeroArticulosCarrito();
   }
 
   crearCarrito() {
     if (!localStorage.getItem('carrito')) {
       localStorage.setItem('carrito', '[]');
     }
+  }
+
+  getNumeroArticulosCarrito() {
+    this.numeroArticulosCarrito = JSON.parse(localStorage.getItem('carrito')).length;
+  }
+
+  irCarrito() {
+    window.location.href = "/tienda/carrito";
   }
 
 

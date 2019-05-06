@@ -17,9 +17,8 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   logueado: boolean = false;
 
   addScript: boolean = false;
-  paypalLoad: boolean = true;
 
-  finalAmount: number = this.getTotalCarrito();
+  finalAmount = this.getTotalCarrito();
 
   paypalConfig = {
     env: 'sandbox',
@@ -28,13 +27,16 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
       production: 'EJPF5gIDfWmERlCKBvca-PxvZSCg9Awn2EV9z7sYdVriXEtGrrmMQyOGuLZWYC5bIERPIQ4RmYYlxJHD'
     },
     commit: true,
-
+   
     payment: (data, actions) => {
       return actions.payment.create({
         payment: {
-          transactions: [
-            { amount: { total: this.finalAmount, currency: 'EUR' } }
-          ]
+          transactions: [{ 
+            amount: { 
+              total: this.finalAmount, 
+              currency: 'EUR' 
+            } 
+          }]
         }
       });
     },
@@ -49,8 +51,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
     if (!this.addScript) {
       this.addPaypalScript().then(() => {
-        paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
-        this.paypalLoad = false;
+          paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
       })
     }
   }
@@ -58,7 +59,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   
   addPaypalScript() {
     this.addScript = true;
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       let scripttagElement = document.createElement('script');
       scripttagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
       scripttagElement.onload = resolve;
@@ -74,7 +75,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
     this.carrito = this.getCarrito();
     this.estaAutenticado();
   }
-
+  
   getCarrito() {
     return JSON.parse(localStorage.getItem('carrito'));
   }
@@ -91,8 +92,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
       tmp += parseFloat(this.carrito[i].totalArticulo);
     }
 
-    return tmp;
-
+    return tmp.toFixed(2);
   }
 
   eliminarDelCarrito(articulo) {
@@ -105,10 +105,13 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
         break;
       }
     }
-
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigateByUrl('/tienda/carrito');
-    });
+    
+    if (tmp.length <= 0) {
+      window.location.href = "/tienda";
+    } else {
+      window.location.href = "/tienda/carrito";
+    }
+    
   }
 
   vaciarCarrito() {
@@ -134,7 +137,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
           this.carrito = [];
           this.setCarrito(this.carrito);
           alert('Compra procesada correctamente');
-          this.router.navigate(['/cuenta']);
+          window.location.href = "/cuenta";
         }
       });
     }
@@ -152,4 +155,5 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   loguearse() {
     this.router.navigate(['/login/carrito']);
   }
+
 }

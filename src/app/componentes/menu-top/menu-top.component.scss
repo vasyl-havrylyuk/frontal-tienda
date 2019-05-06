@@ -40,6 +40,13 @@ nav {
 
     .carrito {
         margin-left: 5px;
+        position: relative;
+
+        .numeroArticulosCarrito {
+            position: absolute;
+            right: -8px;
+            top: -8px;
+        }
     }
 
 }

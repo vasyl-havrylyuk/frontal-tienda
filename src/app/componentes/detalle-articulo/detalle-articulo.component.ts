@@ -10,14 +10,13 @@ import { Title } from '@angular/platform-browser';
 })
 export class DetalleArticuloComponent implements OnInit {
   detalleArticulo = [];
-  cantidad = 1;
+  cantidad: number;
   carrito = [];
 
   constructor(private tiendaService: TiendaService, private route: ActivatedRoute, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
     this.getDetalleArticulo();
-    // Establecemos el titulo de la pagina dentro del observable getDetalleArticulo
   }
 
   getDetalleArticulo() {
@@ -28,12 +27,33 @@ export class DetalleArticuloComponent implements OnInit {
         this.detalleArticulo = response;
         this.titleService.setTitle(this.detalleArticulo[0].nombre);
       });
+
+      this.cantidad = this.getCantidadActual(k);
     });
   }
 
+
+  getCantidadActual(k): number {
+    var cantidad = 1;
+
+    var carrito = JSON.parse(localStorage.getItem('carrito'));
+    var articuloExistente = carrito.filter(response => response.k.indexOf(k) !== -1);
+    
+    if (articuloExistente.length !== 0) {
+      cantidad = articuloExistente[0].cantidad;
+    }
+
+    return cantidad;
+  }
+  
+
   actualizarCarrito(articulo) {
+    // IFS ternarios que comprueban la cantidad, en caso de ser negativa o superar el stock se modifica su valor
+    this.cantidad > articulo.stock ? this.cantidad = articulo.stock : null;
+    this.cantidad <= 0 ? this.cantidad = 1 : null;
+
     const carrito = JSON.parse(localStorage.getItem('carrito'));
-    const totalArticulo = this.cantidad * articulo.precio;
+    const totalArticulo = (this.cantidad * articulo.precio).toFixed(2);
     const cantidad = this.cantidad;
 
     articulo.cantidad = cantidad;
@@ -65,7 +85,7 @@ export class DetalleArticuloComponent implements OnInit {
     // seteamos el carrito en el almacenamiento web.
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
-    this.router.navigate(['/tienda/carrito']);
+    window.location.href = "/tienda/carrito";
   }
 }
 
