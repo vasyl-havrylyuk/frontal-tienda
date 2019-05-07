@@ -115,8 +115,8 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   }
 
   vaciarCarrito() {
-    this.carrito = [];
-    this.setCarrito(this.carrito);
+    this.setCarrito([]);
+    window.location.href = "/tienda";
   }
 
   carritoValido() {

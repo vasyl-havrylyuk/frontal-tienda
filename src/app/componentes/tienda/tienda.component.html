@@ -118,9 +118,14 @@
 
                             <article class="card" (click)="verDetalle(item.k)">
                                 <div class="card-body">
+                                    <div class="udsDisponiblesWrapper text-center"><span class="udsDisponibles">QUEDAN <strong>{{ item.stock }}</strong></span></div>
                                     <div class="imgWrapper"><img class="articulo img-fluid" [attr.src]="'assets/img/' + item.imagen"></div>
                                     <div class="nameWrapper">{{ item.nombre }}</div>
                                     <div class="precioWrapper">{{ item.precio }}€</div>
+                                </div>
+
+                                <div class="overlayWrapper">
+                                    <h4 class="lead">VER DETALLE</h4>
                                 </div>
                             </article>
                         </div>

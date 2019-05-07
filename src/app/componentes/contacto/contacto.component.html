@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Contacto</h1>
 
-    <form id="contacto" action="#" method="post">
+    <form id="contacto">
       <div class="form-group">
         <label for="nombre" class="lead control-label">Nombre y apellidos</label>
         <input type="text" id="nombre" name="nombre" class="form-control" placeholder="p. ej:. Pepito Nuñoz" required>
@@ -20,7 +20,7 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-outline-dark" type="submit">Enviar</button>
+        <button class="btn btn-outline-dark" (click)="validar()" type="button">Enviar</button>
       </div>
       
     </form>
