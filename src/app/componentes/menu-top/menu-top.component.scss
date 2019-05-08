@@ -10,6 +10,16 @@ nav {
         }
     }
 
+    .mapawebWrapper a {
+        color: rgba(231, 231, 231, 0.356);
+        margin: 0 10px;
+        text-decoration: none;
+        
+        &:hover {
+            cursor:pointer;
+            color:#fff;
+        }
+    }
     
 }
 

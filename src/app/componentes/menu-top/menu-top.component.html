@@ -9,20 +9,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto text-center">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/tienda" routerLinkActive="active">MATERIAL DEPORTIVO</a>
+          <a class="nav-link" routerLink="/tienda" routerLinkActive="active">TIENDA</a>
         </li>
 
         <li class="nav-item">
-          <a href="blog/" class="nav-link">BLOG</a>
+          <a class="nav-link" routerLink="/tienda" routerLinkActive="active">TIENDA</a>
+        </li>
+
+
+        <a class="btn btn-outline-info" routerLink="/contacto">Contacto</a>
+        <li class="nav-item d-flex align-items-center mb-3 justify-content-center mapawebWrapper">
+            <a href="mapaweb.html" class="fas fa-globe-europe" title="Mapa web"></a>
         </li>
       </ul>
 
       <div class="iconsBtnWrapper d-flex align-content-center">
-        <a class="btn login" (click)="botonLogin()">
+        <a class="btn login" (click)="botonLogin()" title="Cuenta de usuario">
           <i class="fas fa-user"></i>
         </a>
 
-        <a *ngIf="numeroArticulosCarrito >= 1" class="btn carrito" (click)="irCarrito()">
+        <a *ngIf="numeroArticulosCarrito >= 1" class="btn carrito" (click)="irCarrito()" title="Carrito de compras">
           <i class="fas fa-shopping-cart"></i>
           <span class="badge bg-success numeroArticulosCarrito">{{ numeroArticulosCarrito }}</span>
         </a>

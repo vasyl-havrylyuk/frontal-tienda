@@ -32,7 +32,6 @@ export class DetalleArticuloComponent implements OnInit {
     });
   }
 
-
   getCantidadActual(k): number {
     var cantidad = 1;
 

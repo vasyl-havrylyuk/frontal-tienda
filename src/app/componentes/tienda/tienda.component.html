@@ -116,7 +116,7 @@
                         *ngFor="let item of articulos | paginate: { itemsPerPage: paginacion, currentPage: paginaActual }">
                         <div class="col col-12 col-md-6 col-lg-4 articleMaterial">
 
-                            <article class="card" (click)="verDetalle(item.k)">
+                            <article class="card" (click)="verDetalle(item.k)" [title]="item.nombre">
                                 <div class="card-body">
                                     <div class="udsDisponiblesWrapper text-center"><span class="udsDisponibles">QUEDAN <strong>{{ item.stock }}</strong></span></div>
                                     <div class="imgWrapper"><img class="articulo img-fluid" [attr.src]="'assets/img/' + item.imagen"></div>
