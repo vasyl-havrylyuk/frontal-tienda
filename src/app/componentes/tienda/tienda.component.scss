@@ -4,8 +4,8 @@ section {
     .container {
         position:relative;
 
-        .col.menu {
 
+        .col.menu {
 
             .container {
                 display: block;
@@ -120,12 +120,13 @@ section {
                 }
             }
 
+
         }
 
         .col.articulos {
             .wrapperPaginacion {
                 color: #000;
-                background: #52368033;
+                background: #fff;
                 padding: 5px 0;   
                 border-bottom-left-radius: 5px;
                 border-bottom-right-radius: 5px;
@@ -273,6 +274,10 @@ section {
                 content: '⬅';
             }*/
         }
+
+
+        
     }
+
 }
 

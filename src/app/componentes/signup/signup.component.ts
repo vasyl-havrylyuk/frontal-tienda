@@ -3,6 +3,7 @@ import { RegistroService } from 'src/app/servicios/registro.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { BreadcrumbsModule } from 'ng6-breadcrumbs';
 declare var $: any;
 
 @Component({

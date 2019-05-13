@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BreadcrumbsModule } from "ng6-breadcrumbs";
 
 
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { SignupComponent } from './componentes/signup/signup.component';
 import { CuentaComponent } from './componentes/cuenta/cuenta.component';
 import { LogoTopComponent } from './componentes/logo-top/logo-top.component';
+import { MapaWebComponent } from './componentes/mapa-web/mapa-web.component';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { LogoTopComponent } from './componentes/logo-top/logo-top.component';
     CarritoComponent,
     SignupComponent,
     CuentaComponent,
-    LogoTopComponent
+    LogoTopComponent,
+    MapaWebComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { LogoTopComponent } from './componentes/logo-top/logo-top.component';
     NgxPaginationModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BreadcrumbsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { SignupComponent } from './componentes/signup/signup.component';
 import { CuentaComponent } from './componentes/cuenta/cuenta.component';
+import { MapaWebComponent } from './componentes/mapa-web/mapa-web.component';
 
 const routes: Routes = [
   { path: '', component:  TiendaComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'login/:destino', component:  LoginComponent },
   { path: 'signup', component:  SignupComponent },
   { path: 'cuenta', component: CuentaComponent },
-  { path: 'contacto', component:  ContactoComponent }
+  { path: 'contacto', component:  ContactoComponent },
+  { path: 'mapaweb', component:  MapaWebComponent }
 ];
 
 @NgModule({

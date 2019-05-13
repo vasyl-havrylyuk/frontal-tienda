@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ContactoService } from 'src/app/servicios/contacto.service';
+import { Router } from '@angular/router';
+import { BreadcrumbsService } from 'ng6-breadcrumbs';
 
 @Component({
   selector: 'app-contacto',
@@ -9,12 +11,19 @@ import { ContactoService } from 'src/app/servicios/contacto.service';
 })
 export class ContactoComponent implements OnInit {
 
-  constructor(private titleService: Title, private contactoService: ContactoService) { }
+  constructor(private titleService: Title, private router: Router, private contactoService: ContactoService, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
     this.titleService.setTitle('Contacto');
+    this.parametrizarCaminoMigas();
   }
 
+  parametrizarCaminoMigas() {
+    this.breadcrumbs.store([
+      {label: 'Contacto', url: '/contacto', params: []},
+      {label: '', url: '', params: []},
+    ])
+  }
 
   validar() {
     var hayErrores = false;
@@ -48,7 +57,7 @@ export class ContactoComponent implements OnInit {
       this.contactoService.enviarMensaje(data).subscribe(response => {
         if (response.mensajeEnviado) {
           alert('Mensaje enviado correctamente');
-          window.location.href = "/tienda";
+          this.router.navigate(['/tienda']);
         } else {
           alert('Hubo algún error al enviar el mensaje');
         }

@@ -3,6 +3,7 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { BreadcrumbsService } from 'ng6-breadcrumbs';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,20 @@ import { Title } from '@angular/platform-browser';
 export class LoginComponent implements OnInit {
   mensaje = '';
 
-  constructor(private autenticacionService: AutenticacionService, private route: ActivatedRoute, private router: Router, private titleService: Title) { }
+  constructor(private autenticacionService: AutenticacionService, private route: ActivatedRoute, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.titleService.setTitle('Login');
+    this.parametrizarCaminoMigas();
+  }
+
+  parametrizarCaminoMigas() {
+    this.route.params.subscribe(res => {
+      this.breadcrumbs.store([
+        {label: 'Login', url: '/login/'+res['destino'], params: []},
+        {label: '', url: '', params: []},
+      ])
+    });
   }
 
   autenticar(event: any) {
@@ -42,13 +53,13 @@ export class LoginComponent implements OnInit {
                 case 'cuenta':
                   this.router.navigate(['/' + destino]);
                   break;
+
+                  
               } 
             }
           } else {
             this.mensaje = 'No has activado tu cuenta';
           }
-
-
 
         } else {
           this.mensaje = 'El usuario y/o contraseña incorrectos';

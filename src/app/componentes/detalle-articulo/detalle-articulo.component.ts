@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TiendaService } from '../../servicios/tienda.service';
 import { Title } from '@angular/platform-browser';
+import { BreadcrumbsService } from 'ng6-breadcrumbs';
 
 @Component({
   selector: 'app-detalle-articulo',
@@ -13,10 +14,19 @@ export class DetalleArticuloComponent implements OnInit {
   cantidad: number;
   carrito = [];
 
-  constructor(private tiendaService: TiendaService, private route: ActivatedRoute, private router: Router, private titleService: Title) { }
+  constructor(private tiendaService: TiendaService, private route: ActivatedRoute, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
     this.getDetalleArticulo();
+  }
+
+
+  parametrizarCaminoMigas(nombreArticulo, idArticulo) {
+    this.breadcrumbs.store([
+      {label: 'Tienda', url: '/tienda', params: []},
+      {label: nombreArticulo, url: 'tienda/articulo/'+idArticulo, params: []},
+      {label: '', url: '', params: []},
+    ])
   }
 
   getDetalleArticulo() {
@@ -26,6 +36,8 @@ export class DetalleArticuloComponent implements OnInit {
       this.tiendaService.getDetalleArticulo(k).subscribe(response => {
         this.detalleArticulo = response;
         this.titleService.setTitle(this.detalleArticulo[0].nombre);
+        this.parametrizarCaminoMigas(this.detalleArticulo[0].nombre, k);
+        
       });
 
       this.cantidad = this.getCantidadActual(k);

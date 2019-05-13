@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CuentaService } from 'src/app/servicios/cuenta.service';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BreadcrumbsService } from 'ng6-breadcrumbs';
 
 @Component({
   selector: 'app-cuenta',
@@ -15,15 +16,22 @@ export class CuentaComponent implements OnInit {
   usuario = [];
   historialPedidos = [];
 
-  constructor(private autenticacionService: AutenticacionService, private cuentaService: CuentaService, private router: Router, private titleService: Title) { }
+  constructor(private autenticacionService: AutenticacionService, private cuentaService: CuentaService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
     this.titleService.setTitle('Detalles de la cuenta');
     this.estaAutenticado();
     this.getDetallesUsuario();
     this.getHistorialPedidos();
+    this.parametrizarCaminoMigas();
   }
 
+  parametrizarCaminoMigas() {
+    this.breadcrumbs.store([
+      {label: 'Cuenta', url: '/cuenta', params: []},
+      {label: '', url: '', params: []},
+    ])
+  }
 
   estaAutenticado() {
     this.autenticacionService.estaAutenticado().subscribe(response => {

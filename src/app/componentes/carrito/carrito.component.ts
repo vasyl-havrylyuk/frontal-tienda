@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CompraService } from 'src/app/servicios/compra.service';
 import { Title } from '@angular/platform-browser';
 import { reject } from 'q';
+import { BreadcrumbsService } from 'ng6-breadcrumbs';
 
 declare let paypal: any;
 
@@ -49,7 +50,7 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   };
 
   ngAfterViewChecked(): void {
-    if (!this.addScript) {
+    if (!this.addScript && $('#paypal-checkout-btn').length) {
       this.addPaypalScript().then(() => {
           paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
       })
@@ -68,12 +69,22 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
   }
 
 
-  constructor(private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title) { }
+  constructor(private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
     this.titleService.setTitle('Carrito');
     this.carrito = this.getCarrito();
     this.estaAutenticado();
+    this.parametrizarCaminoMigas();
+  }
+
+
+  parametrizarCaminoMigas() {
+    this.breadcrumbs.store([
+      {label: 'Tienda', url: '/tienda', params: []},
+      {label: 'Carrito', url: 'tienda/carrito', params: []},
+      {label: '', url: '', params: []},
+    ])
   }
   
   getCarrito() {

@@ -3,6 +3,7 @@ import { TiendaService } from 'src/app/servicios/tienda.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Title } from '@angular/platform-browser';
+import { BreadcrumbsService } from 'ng6-breadcrumbs';
 
 @Component({
   selector: 'app-tienda',
@@ -21,7 +22,7 @@ export class TiendaComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private tiendaService: TiendaService, breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private titleService: Title) { 
+  constructor(private router: Router, private tiendaService: TiendaService, breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private titleService: Title, private breadcrumbs: BreadcrumbsService) { 
     breakpointObserver.observe(['(max-width: 768px)']).subscribe(response => {
       if (response.matches) {
         this.modificarMenuLateral('minimize');
@@ -36,8 +37,15 @@ export class TiendaComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Tienda');
     this.getArticulos();
+    this.parametrizarCaminoMigas();
   }
 
+  parametrizarCaminoMigas() {
+    this.breadcrumbs.store([
+      {label: 'Tienda' , url: '/', params: []},
+      {label: '' , url: '', params: []}
+    ])
+  }
 
   getArticulos(): any {
     this.tiendaService.getArticulos().subscribe(response => {
