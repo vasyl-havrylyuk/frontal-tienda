@@ -3,7 +3,7 @@ import { RegistroService } from 'src/app/servicios/registro.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { BreadcrumbsModule } from 'ng6-breadcrumbs';
+import { BreadcrumbsModule, BreadcrumbsService } from 'ng6-breadcrumbs';
 declare var $: any;
 
 @Component({
@@ -16,11 +16,23 @@ export class SignupComponent implements OnInit {
   formulario: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router, private titleService: Title) { }
+  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
-    this.titleService.setTitle('Registro');
+    this.setTitle('Registro');
     this.establecerValidaciones();
+    this.parametrizarCaminoMigas();
+  }
+
+  setTitle(titulo) {
+    this.titleService.setTitle(titulo);
+  }
+
+  parametrizarCaminoMigas() {
+    this.breadcrumbs.store([
+      {label: 'Registro', url: '/signup', params: []},
+      {label: '', url: '', params: []},
+    ])
   }
 
   establecerValidaciones() {

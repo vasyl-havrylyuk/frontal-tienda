@@ -8,16 +8,18 @@ import { LoginComponent } from './componentes/login/login.component';
 import { SignupComponent } from './componentes/signup/signup.component';
 import { CuentaComponent } from './componentes/cuenta/cuenta.component';
 import { MapaWebComponent } from './componentes/mapa-web/mapa-web.component';
+import { AboutComponent } from './componentes/about/about.component';
 
 const routes: Routes = [
   { path: '', component:  TiendaComponent },
   { path: 'tienda', component:  TiendaComponent },
   { path: 'tienda/articulo/:k', component:  DetalleArticuloComponent },
   { path: 'tienda/carrito', component:  CarritoComponent },
-  { path: 'login/:destino', component:  LoginComponent },
-  { path: 'signup', component:  SignupComponent },
   { path: 'cuenta', component: CuentaComponent },
   { path: 'contacto', component:  ContactoComponent },
+  { path: 'about', component:  AboutComponent },
+  { path: 'login/:destino', component:  LoginComponent },
+  { path: 'signup', component:  SignupComponent },
   { path: 'mapaweb', component:  MapaWebComponent }
 ];
 

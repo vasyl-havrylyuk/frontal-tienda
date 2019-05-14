@@ -1,14 +1,15 @@
 nav {
     background: #2b0238 !important;
 
+    .dropdown-menu {
+        margin-bottom: 20px;
+    }
 
     a.nav-link.active {
         color: #fff !important;
-
-        @media (max-width:992px) {
-            margin-top: 20px;
-        }
     }
+
+    
 
     .mapawebWrapper a {
         color: rgba(231, 231, 231, 0.356);

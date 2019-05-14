@@ -1,2 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+
+
+
+body {
+    position: relative;
+    min-height: 100vh;
+
+    .fluid-bread {
+        background: #fff !important;
+        font-size: 12px;
+    
+        .breadcrumb {
+            background: none !important;
+            padding: 0 5px !important;
+        }
+    }
+
+    section {
+        padding-bottom: 5.5rem;
+    }
+}

@@ -1,9 +1,13 @@
 footer {
+    display: flex;
     background: #1d0125 !important;
-    
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3.5rem;
+
+
     .container {
-        padding-top:15px;
-        padding-bottom:15px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -14,6 +18,11 @@ footer {
             align-items: center;
             font-size: 13px;
             font-family: sans-serif;
+        }
+
+        .accesibilidad {
+            display: flex;
+            align-items: center;    
         }
     }
 }

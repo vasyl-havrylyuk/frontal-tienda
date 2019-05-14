@@ -53,4 +53,8 @@ export class MenuTopComponent implements OnInit {
       }
     });
   }
+
+  menu() {
+    $('.dropdown-menu').toggleClass('show');
+  }
 }

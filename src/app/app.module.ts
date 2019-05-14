@@ -22,6 +22,7 @@ import { SignupComponent } from './componentes/signup/signup.component';
 import { CuentaComponent } from './componentes/cuenta/cuenta.component';
 import { LogoTopComponent } from './componentes/logo-top/logo-top.component';
 import { MapaWebComponent } from './componentes/mapa-web/mapa-web.component';
+import { AboutComponent } from './componentes/about/about.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MapaWebComponent } from './componentes/mapa-web/mapa-web.component';
     SignupComponent,
     CuentaComponent,
     LogoTopComponent,
-    MapaWebComponent
+    MapaWebComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

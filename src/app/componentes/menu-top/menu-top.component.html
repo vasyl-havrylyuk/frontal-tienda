@@ -12,8 +12,15 @@
           <a class="nav-link" routerLink="/tienda" routerLinkActive="active">TIENDA</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contacto" routerLinkActive="active">CONTACTO</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">MÁS</a>
+
+          <div class="dropdown-menu">
+            <a class="dropdown-item text-center" routerLink="/about">ACERCA DE</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-center" routerLink="/contacto">CONTACTO</a>
+          </div>
+          
         </li>
 
         <li class="nav-item d-flex align-items-center mb-3 justify-content-center mapawebWrapper">

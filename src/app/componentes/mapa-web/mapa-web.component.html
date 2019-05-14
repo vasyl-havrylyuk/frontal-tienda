@@ -1,3 +1,25 @@
-<p>
-  mapa-web works!
-</p>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col mt-3 mapaWeb">
+        
+        <h4>Mapa web</h4>
+        <hr>
+        <ul>
+          <li><a routerLink="/tienda">Tienda</a>
+            <ol>
+              <li><a routerLink="/tienda/carrito">Carrito</a></li>
+              <li *ngFor="let item of articulos"><a [routerLink]="'/tienda/articulo/' + item.k">{{ item.nombre }}</a></li>
+            </ol>
+          </li>
+          <li><a routerLink="/cuenta">Cuenta</a></li>
+          <li><a routerLink="/contacto">Acerca de</a></li>
+          <li><a routerLink="/contacto">Contacto</a></li>
+          <li><a routerLink="/login/cuenta">Login</a></li>
+          <li><a routerLink="/signup">Registro</a></li>
+          <li><a routerLink="/mapaweb">Mapa web</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
