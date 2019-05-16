@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { BreadcrumbsModule, BreadcrumbsService } from 'ng6-breadcrumbs';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
+
 declare var $: any;
 
 @Component({
@@ -17,7 +19,7 @@ export class SignupComponent implements OnInit {
   submitted = false;
   resultado: any;
 
-  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+  constructor(private formBuilder: FormBuilder, private spinnerService: SpinnerService, private registroService: RegistroService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
     this.setTitle('Registro');
@@ -65,15 +67,15 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.crearSpinner();
+    this.spinnerService.crear();
 
     this.registroService.registrarUsuario(this.formulario.value).subscribe(response => {
-      $('#signupLoadWrapper').remove();
+      this.spinnerService.eliminar();
       
       if (response.registrado) {
         $('#envioMensaje').modal('show');
         setTimeout(function() {
-          document.location.href = '/login/cuenta';
+          this.router.navigate(['/login/cuenta']);
         }, 3500);
       } else {
         for (const key in response) {
@@ -81,30 +83,6 @@ export class SignupComponent implements OnInit {
         }
       }
 
-
-
-    });
-  }
-
-  crearSpinner() {
-    let $signupLoadWrapper = $('<div id="signupLoadWrapper"></div>').appendTo(document.body);
-    $signupLoadWrapper.css({
-        "position":"fixed", 
-        "left":"0", 
-        "top":"0", 
-        "right":"0", 
-        "bottom":"0", 
-        "background":"rgba(254, 254, 254, 0.91)", 
-        "z-index":"1000", 
-        "display":"none",
-        "text-align":"center"
-      })
-      .fadeIn(300);
-
-    let $spinner = $('<i class="fas fa-sync fa-spin"></i>').appendTo($signupLoadWrapper);
-    $spinner.css({
-      "font-size": "25vw",
-      "margin-top": "10vw"
     });
   }
 

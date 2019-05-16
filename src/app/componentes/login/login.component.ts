@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
             } else {
               switch (destino) {
                 case 'carrito':
-                  window.location.href = "/tienda/"+destino;
+                  this.router.navigate(['/tienda/'+destino]);
                   break;
                 case 'cuenta':
                   this.router.navigate(['/' + destino]);

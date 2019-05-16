@@ -31,8 +31,13 @@ section {
                 margin-bottom: 20px;
             }
 
-            .btn.finalizarCompra {
-                border-radius: unset;
+            .btn.realizarPedido {
+                cursor: pointer;
+
+                &:hover {
+                    background: orange;
+                    color: rgb(41, 41, 41);
+                }
             }
         }
         

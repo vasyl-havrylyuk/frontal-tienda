@@ -1,10 +1,12 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { Router } from '@angular/router';
 import { CompraService } from 'src/app/servicios/compra.service';
 import { Title } from '@angular/platform-browser';
 import { reject } from 'q';
 import { BreadcrumbsService } from 'ng6-breadcrumbs';
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
 
 declare let paypal: any;
 
@@ -13,70 +15,64 @@ declare let paypal: any;
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.scss']
 })
-export class CarritoComponent implements OnInit, AfterViewChecked {
+export class CarritoComponent implements OnInit {
   carrito = [];
   logueado: boolean = false;
-
   addScript: boolean = false;
-
   finalAmount = this.getTotalCarrito();
-
-  paypalConfig = {
-    env: 'sandbox',
-    client: {
-      sandbox: 'AdLTFQnKvS1JkakBg2cfBd2C3RF78ahhzPMsP8kbryj6rvg4jnZ10X1XiQbco0aiq3hyDa1QgoB-mbN6',
-      production: 'EJPF5gIDfWmERlCKBvca-PxvZSCg9Awn2EV9z7sYdVriXEtGrrmMQyOGuLZWYC5bIERPIQ4RmYYlxJHD'
-    },
-    commit: true,
-   
-    payment: (data, actions) => {
-      return actions.payment.create({
-        payment: {
-          transactions: [{ 
-            amount: { 
-              total: this.finalAmount, 
-              currency: 'EUR' 
-            } 
-          }]
-        }
-      });
-    },
-    
-    onAuthorize: (data, actions) => {
-      return actions.payment.execute().then((payment) => {
-        this.finalizarCompra();
-      })
-    }
-  };
-
-  ngAfterViewChecked(): void {
-    if (!this.addScript && $('#paypal-checkout-btn').length) {
-      this.addPaypalScript().then(() => {
-          paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
-      })
-    }
-  }
-
-  
-  addPaypalScript() {
-    this.addScript = true;
-    return new Promise(resolve => {
-      let scripttagElement = document.createElement('script');
-      scripttagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
-      scripttagElement.onload = resolve;
-      document.body.appendChild(scripttagElement);
-    })
-  }
+  public payPalConfig?: IPayPalConfig;
 
 
-  constructor(private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+  constructor(private ngZone: NgZone, private spinnerService: SpinnerService, private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+
 
   ngOnInit() {
     this.titleService.setTitle('Carrito');
     this.carrito = this.getCarrito();
     this.estaAutenticado();
     this.parametrizarCaminoMigas();
+    this.initPaypalConfig();
   }
+
+
+  private initPaypalConfig(): void {
+    this.payPalConfig = {
+      currency: 'EUR',
+      clientId: 'AdLTFQnKvS1JkakBg2cfBd2C3RF78ahhzPMsP8kbryj6rvg4jnZ10X1XiQbco0aiq3hyDa1QgoB-mbN6',
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [
+          {
+            amount: {
+              currency_code: 'EUR',
+              value: this.finalAmount
+            },
+            items: []
+          }
+        ]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+      onApprove: (data, actions) => {
+        actions.order.get().then(details => {
+          this.finalizarCompra()
+        });
+      },
+      onClientAuthorization: (data) => {},
+      onCancel: (data, actions) => {},
+      onError: err => {},
+      onClick: () => {
+        this.spinnerService.crear();
+      },
+    };
+  }
+
+
 
 
   parametrizarCaminoMigas() {
@@ -118,16 +114,18 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
     }
     
     if (tmp.length <= 0) {
-      window.location.href = "/tienda";
+      this.router.navigate(['/tienda']);
     } else {
-      window.location.href = "/tienda/carrito";
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate(['/tienda/carrito'])
+      })
     }
     
   }
 
   vaciarCarrito() {
     this.setCarrito([]);
-    window.location.href = "/tienda";
+     this.router.navigate(['/tienda']);
   }
 
   carritoValido() {
@@ -142,16 +140,18 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
 
 
   finalizarCompra() {
+    
     if (this.carritoValido()) {
       this.compraService.procesarCompra(this.carrito).subscribe(response2 => {
         if (response2.correcto) {
-          this.carrito = [];
-          this.setCarrito(this.carrito);
-          alert('Compra procesada correctamente');
-          window.location.href = "/cuenta";
+          this.setCarrito([]);
+          this.spinnerService.eliminar();
+          alert('Su compra ha sido procesada, se le he enviado\nun correo de confirmación');
+          this.ngZone.run(() => this.router.navigate(['/cuenta']));
         }
       });
     }
+
   }
 
   estaAutenticado() {
@@ -160,11 +160,6 @@ export class CarritoComponent implements OnInit, AfterViewChecked {
         this.logueado = true;
       }
     });
-  }
-
-
-  loguearse() {
-    this.router.navigate(['/login/carrito']);
   }
 
 }

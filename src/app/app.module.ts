@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BreadcrumbsModule } from "ng6-breadcrumbs";
+import { NgxPayPalModule } from 'ngx-paypal';
 
 
 import { AppComponent } from './app.component';
@@ -51,7 +52,8 @@ import { AboutComponent } from './componentes/about/about.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    BreadcrumbsModule
+    BreadcrumbsModule,
+    NgxPayPalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -33,7 +33,7 @@
           <i class="fas fa-user"></i>
         </a>
 
-        <a *ngIf="numeroArticulosCarrito >= 1" class="btn carrito" (click)="irCarrito()" title="Carrito de compras">
+        <a *ngIf="numeroArticulosCarrito >= 1" class="btn carrito" routerLink="/tienda/carrito" title="Carrito de compras">
           <i class="fas fa-shopping-cart"></i>
           <span class="badge bg-success numeroArticulosCarrito">{{ numeroArticulosCarrito }}</span>
         </a>

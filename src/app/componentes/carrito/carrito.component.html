@@ -1,3 +1,6 @@
+
+
+
 <section>
   <div class="container">
     <ng-container *ngIf="carrito.length == 0">
@@ -50,10 +53,12 @@
               <h3 class="total text-center"><strong>Total a pagar</strong>: {{finalAmount}}€</h3>
             </div>
 
+            
             <div class="col-12 text-center">
-              <div *ngIf="logueado" id="paypal-checkout-btn"></div>
-              <div *ngIf="!logueado" (click)="loguearse()" ><img [attr.src]="'assets/img/paypal.png'" style="cursor: pointer;"></div>
+              <ngx-paypal *ngIf="logueado" [config]="payPalConfig"></ngx-paypal>
+              <div *ngIf="!logueado" routerLink="/login/carrito" class="w-100 btn btn-warning realizarPedido">REALIZAR PEDIDO</div>
             </div>
+
           </div>
         </div>
       </div>

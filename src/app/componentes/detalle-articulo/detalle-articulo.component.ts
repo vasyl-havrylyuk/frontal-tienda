@@ -96,7 +96,7 @@ export class DetalleArticuloComponent implements OnInit {
     // seteamos el carrito en el almacenamiento web.
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
-    window.location.href = "/tienda/carrito";
+    this.router.navigate(['/tienda/carrito']);
   }
 }
 

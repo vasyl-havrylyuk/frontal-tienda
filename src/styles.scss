@@ -23,3 +23,23 @@ body {
         padding-bottom: 5.5rem;
     }
 }
+
+#signupLoadWrapper {
+    position: fixed;
+    left: 0; 
+    top: 0; 
+    right: 0; 
+    bottom: 0; 
+    background: rgba(254, 254, 254, 0.91); 
+    z-index: 1000;
+    display: none;
+    text-align: center;
+
+    .spinner {
+        font-size: 25vw;
+        margin-top: 10vw;
+    }
+
+}
+
+

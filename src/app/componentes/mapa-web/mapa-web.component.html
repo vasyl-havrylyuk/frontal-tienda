@@ -8,7 +8,7 @@
         <ul>
           <li><a routerLink="/tienda">Tienda</a>
             <ol>
-              <li><a routerLink="/tienda/carrito">Carrito</a></li>
+              <li><a routerLink="/tienda/carrito"><u>Carrito</u></a></li>
               <li *ngFor="let item of articulos"><a [routerLink]="'/tienda/articulo/' + item.k">{{ item.nombre }}</a></li>
             </ol>
           </li>
