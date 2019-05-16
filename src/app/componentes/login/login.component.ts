@@ -44,7 +44,15 @@ export class LoginComponent implements OnInit {
 
           if (response.usuarioActivado) {
             if (response.adminAutenticado) {
-              window.location.href = '/admin';
+              let abrirPanel = confirm('¿Quieres abrir el panel de control?');
+
+              if (abrirPanel) {
+                window.location.href = "/admin";
+              } else {
+                this.router.navigate(['/cuenta']);
+              }
+
+
             } else {
               switch (destino) {
                 case 'carrito':

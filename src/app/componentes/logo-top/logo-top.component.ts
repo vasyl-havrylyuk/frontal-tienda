@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logo-top',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoTopComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+
+  recargarComponente() {
+    this.router.navigateByUrl('/tienda', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['/'])
+    })
   }
 
 }

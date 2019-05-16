@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TiendaService } from '../../servicios/tienda.service';
 import { Title } from '@angular/platform-browser';
 import { BreadcrumbsService } from 'ng6-breadcrumbs';
+import { CarritoService } from 'src/app/servicios/carrito.service';
 
 @Component({
   selector: 'app-detalle-articulo',
@@ -14,7 +15,7 @@ export class DetalleArticuloComponent implements OnInit {
   cantidad: number;
   carrito = [];
 
-  constructor(private tiendaService: TiendaService, private route: ActivatedRoute, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+  constructor(private tiendaService: TiendaService, private carritoService: CarritoService, private route: ActivatedRoute, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
     this.getDetalleArticulo();
@@ -95,6 +96,11 @@ export class DetalleArticuloComponent implements OnInit {
 
     // seteamos el carrito en el almacenamiento web.
     localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    
+    // Actualizamos el contador del carrito
+    this.carritoService.actualizarContador();
+    
 
     this.router.navigate(['/tienda/carrito']);
   }

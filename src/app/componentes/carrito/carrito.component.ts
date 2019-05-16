@@ -7,6 +7,7 @@ import { reject } from 'q';
 import { BreadcrumbsService } from 'ng6-breadcrumbs';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
+import { CarritoService } from 'src/app/servicios/carrito.service';
 
 declare let paypal: any;
 
@@ -23,7 +24,7 @@ export class CarritoComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
 
 
-  constructor(private ngZone: NgZone, private spinnerService: SpinnerService, private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+  constructor(private ngZone: NgZone, private carritoService: CarritoService, private spinnerService: SpinnerService, private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
 
   ngOnInit() {
@@ -113,6 +114,9 @@ export class CarritoComponent implements OnInit {
       }
     }
     
+    this.carritoService.actualizarContador();
+
+
     if (tmp.length <= 0) {
       this.router.navigate(['/tienda']);
     } else {
@@ -125,7 +129,8 @@ export class CarritoComponent implements OnInit {
 
   vaciarCarrito() {
     this.setCarrito([]);
-     this.router.navigate(['/tienda']);
+    this.carritoService.actualizarContador();
+    this.router.navigate(['/tienda']);
   }
 
   carritoValido() {
@@ -145,6 +150,7 @@ export class CarritoComponent implements OnInit {
       this.compraService.procesarCompra(this.carrito).subscribe(response2 => {
         if (response2.correcto) {
           this.setCarrito([]);
+          this.carritoService.actualizarContador();
           this.spinnerService.eliminar();
           alert('Su compra ha sido procesada, se le he enviado\nun correo de confirmación');
           this.ngZone.run(() => this.router.navigate(['/cuenta']));

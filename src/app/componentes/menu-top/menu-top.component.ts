@@ -14,10 +14,14 @@ import { CarritoService } from 'src/app/servicios/carrito.service';
 
 
 export class MenuTopComponent implements OnInit {
-  numeroArticulosCarrito: number;
+  numeroArticulosCarrito: any;
 
-  constructor(private autenticacionService: AutenticacionService, private router: Router) {
-    
+  constructor(private carritoService: CarritoService, private autenticacionService: AutenticacionService, private router: Router) {
+    this.carritoService.numeroArticulos.subscribe(
+      (item) => {
+        this.numeroArticulosCarrito = item;
+      }
+   );
   }
 
   ngOnInit() {
@@ -32,7 +36,7 @@ export class MenuTopComponent implements OnInit {
   }
 
   getNumeroArticulosCarrito() {
-    this.numeroArticulosCarrito = JSON.parse(localStorage.getItem('carrito')).length;
+    this.carritoService.actualizarContador();
   }
 
   botonLogin() {
@@ -41,7 +45,13 @@ export class MenuTopComponent implements OnInit {
       if (response.autenticado) {
 
         if (response.adminAutenticado) {
-          window.location.href = '/admin';
+          let abrirPanel = confirm('¿Quieres abrir el panel de control?');
+          if (abrirPanel) {
+            window.location.href = "/admin";
+          } else {
+            this.router.navigate(['/cuenta']);
+          }
+
         } else {
           this.router.navigate(['/cuenta']);
         }

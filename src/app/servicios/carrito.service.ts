@@ -4,9 +4,13 @@ import { Injectable, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class CarritoService {
-  numeroArticulos = new EventEmitter<any>();
+  numeroArticulos: any = new EventEmitter();
 
   constructor() { }
 
+
+  actualizarContador() {
+    this.numeroArticulos.emit(JSON.parse(localStorage.getItem('carrito')).length);
+  }
   
 }
