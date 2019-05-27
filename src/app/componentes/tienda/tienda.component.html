@@ -115,7 +115,7 @@
                 <div class="row articles">
                     <ng-container
                         *ngFor="let item of articulos | paginate: { itemsPerPage: paginacion, currentPage: paginaActual }">
-                        <div class="col col-12 col-md-6 col-lg-4 articleMaterial">
+                        <div class="col col-12 col-sm-6 col-lg-4 articleMaterial">
 
                             <article class="card" (click)="verDetalle(item.k)" [title]="item.nombre">
                                 <div class="card-body">
