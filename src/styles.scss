@@ -35,9 +35,16 @@ body {
     display: none;
     text-align: center;
 
-    .spinner {
-        font-size: 25vw;
+    .headerTextSpinner, .spinner {
         margin-top: 10vw;
+    }
+
+    .headerTextSpinner {
+        font-size: 30px;
+    }
+
+    .spinner {
+        font-size: 50px;
     }
 
 }

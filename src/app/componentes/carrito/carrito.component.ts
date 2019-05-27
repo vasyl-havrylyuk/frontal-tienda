@@ -65,10 +65,12 @@ export class CarritoComponent implements OnInit {
         });
       },
       onClientAuthorization: (data) => {},
-      onCancel: (data, actions) => {},
+      onCancel: (data, actions) => {
+        this.spinnerService.eliminar();
+      },
       onError: err => {},
       onClick: () => {
-        this.spinnerService.crear();
+        this.spinnerService.crear('Procesando compra');
       },
     };
   }

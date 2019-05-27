@@ -67,7 +67,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.spinnerService.crear();
+    this.spinnerService.crear('Procesando el registro');
 
     this.registroService.registrarUsuario(this.formulario.value).subscribe(response => {
       this.spinnerService.eliminar();
