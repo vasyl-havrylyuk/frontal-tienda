@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { BreadcrumbsService } from 'ng6-breadcrumbs';
+import { LogService } from 'src/app/servicios/log.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { BreadcrumbsService } from 'ng6-breadcrumbs';
 export class LoginComponent implements OnInit {
   mensaje = '';
 
-  constructor(private autenticacionService: AutenticacionService, private route: ActivatedRoute, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+  constructor(private logService: LogService, private autenticacionService: AutenticacionService, private route: ActivatedRoute, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {    
     this.titleService.setTitle('Login');
@@ -43,6 +44,8 @@ export class LoginComponent implements OnInit {
         if (response.autenticado) {
 
           if (response.usuarioActivado) {
+            this.logService.loguearDato(['info', response.usuario + ' se ha logueado']).subscribe(response => {});
+
             if (response.adminAutenticado) {
               let abrirPanel = confirm('¿Quieres abrir el panel de control?');
 
@@ -65,6 +68,11 @@ export class LoginComponent implements OnInit {
                   
               } 
             }
+
+
+            
+
+            
           } else {
             this.mensaje = 'No has activado tu cuenta';
           }

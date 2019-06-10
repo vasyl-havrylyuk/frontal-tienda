@@ -5,6 +5,7 @@ import { CuentaService } from 'src/app/servicios/cuenta.service';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BreadcrumbsService } from 'ng6-breadcrumbs';
+import { LogService } from 'src/app/servicios/log.service';
 
 @Component({
   selector: 'app-cuenta',
@@ -16,7 +17,7 @@ export class CuentaComponent implements OnInit {
   usuario = [];
   historialPedidos = [];
 
-  constructor(private autenticacionService: AutenticacionService, private cuentaService: CuentaService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+  constructor(private logService: LogService, private autenticacionService: AutenticacionService, private cuentaService: CuentaService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
     this.titleService.setTitle('Detalles de la cuenta');
@@ -101,6 +102,7 @@ export class CuentaComponent implements OnInit {
 
       this.cuentaService.actualizarCuenta(data).subscribe(response => {
         if (response.cuentaActualizada) {
+          this.logService.loguearDato(['info', response.usuario + ' ha actualizado su cuenta']).subscribe(response => {});
           alert('Has actualizado correctamente tu cuenta');
         }
       });
@@ -114,7 +116,6 @@ export class CuentaComponent implements OnInit {
     this.cuentaService.getHistorialPedidos().subscribe(
       response => {
         this.historialPedidos = response
-        console.log(this.historialPedidos);
       }
     );
   }

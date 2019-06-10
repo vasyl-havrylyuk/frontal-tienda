@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { BreadcrumbsModule, BreadcrumbsService } from 'ng6-breadcrumbs';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
+import { LogService } from 'src/app/servicios/log.service';
 
 declare var $: any;
 
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
   submitted = false;
   resultado: any;
 
-  constructor(private formBuilder: FormBuilder, private spinnerService: SpinnerService, private registroService: RegistroService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+  constructor(private logService: LogService, private formBuilder: FormBuilder, private spinnerService: SpinnerService, private registroService: RegistroService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
   ngOnInit() {
     this.setTitle('Registro');
@@ -71,12 +72,14 @@ export class SignupComponent implements OnInit {
 
     this.registroService.registrarUsuario(this.formulario.value).subscribe(response => {
       this.spinnerService.eliminar();
-      
+
       if (response.registrado) {
         $('#envioMensaje').modal('show');
         setTimeout(function() {
           this.router.navigate(['/login/cuenta']);
         }, 3500);
+        
+        this.logService.loguearDato(['info', response.usuario + ' se ha registrado']).subscribe(response => {});
       } else {
         for (const key in response) {
           $('#' + key).parent().append('<div class="text-danger mb-3 error">'+response[key]+'</div>');

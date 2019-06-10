@@ -8,6 +8,7 @@ import { BreadcrumbsService } from 'ng6-breadcrumbs';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
 import { CarritoService } from 'src/app/servicios/carrito.service';
+import { LogService } from 'src/app/servicios/log.service';
 
 declare let paypal: any;
 
@@ -24,7 +25,7 @@ export class CarritoComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
 
 
-  constructor(private ngZone: NgZone, private carritoService: CarritoService, private spinnerService: SpinnerService, private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
+  constructor(private logService: LogService, private ngZone: NgZone, private carritoService: CarritoService, private spinnerService: SpinnerService, private autenticacionService: AutenticacionService, private compraService: CompraService, private router: Router, private titleService: Title, private breadcrumbs: BreadcrumbsService) { }
 
 
   ngOnInit() {
@@ -154,6 +155,7 @@ export class CarritoComponent implements OnInit {
           this.setCarrito([]);
           this.carritoService.actualizarContador();
           this.spinnerService.eliminar();
+          this.logService.loguearDato(['info', response2.usuario + ' ha realizado el pedido #' + response2.pedido]).subscribe(response => {});
           alert('Su compra ha sido procesada, se le he enviado\nun correo de confirmación');
           this.ngZone.run(() => this.router.navigate(['/cuenta']));
         }
