@@ -31,17 +31,37 @@ section {
                 margin-bottom: 20px;
             }
 
-            .btn.realizarPedido {
-                cursor: pointer;
+            .botonesPagar {
+                position: relative;
+                width: 100%;
 
-                &:hover {
-                    background: orange;
-                    color: rgb(41, 41, 41);
+                .botonPaypal, .btn.realizarPedido {
+                    position: absolute;    
+                    left:15px;
+                    right:0;
+                    width: calc(100% - 30px);
+                }
+                
+                .botonPaypal {
+                    z-index: 10;
+                }
+    
+                .btn.realizarPedido {
+                    z-index: 5;
+
+                    cursor: pointer;
+    
+                    &:hover {
+                        background: orange;
+                        color: rgb(41, 41, 41);
+                    }
                 }
             }
-        }
-        
+        }   
     }
+
+
+   
 }
 
 

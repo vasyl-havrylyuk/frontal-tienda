@@ -54,8 +54,10 @@
             </div>
 
             
-            <div class="col-12 text-center">
-              <ngx-paypal *ngIf="logueado" [config]="payPalConfig"></ngx-paypal>
+            <div class="col-12 text-center botonesPagar">
+              <ngx-paypal *ngIf="logueado" [config]="payPalConfig" class="botonPaypal"></ngx-paypal>
+              <i *ngIf="logueado" class="fas fa-sync fa-spin spinner"></i>
+
               <div *ngIf="!logueado" routerLink="/login/carrito" class="w-100 btn btn-warning realizarPedido">REALIZAR PEDIDO</div>
             </div>
 
