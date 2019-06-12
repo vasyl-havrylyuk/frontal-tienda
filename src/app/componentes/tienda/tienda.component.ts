@@ -48,6 +48,7 @@ export class TiendaComponent implements OnInit {
   }
 
   getArticulos(): any {
+    
     this.tiendaService.getArticulos().subscribe(response => {
       this.articulos = response;
       this.articulosFiltrados = response;
