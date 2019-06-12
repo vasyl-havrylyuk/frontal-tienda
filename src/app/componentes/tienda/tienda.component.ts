@@ -11,15 +11,19 @@ import { BreadcrumbsService } from 'ng6-breadcrumbs';
   styleUrls: ['./tienda.component.scss']
 })
 export class TiendaComponent implements OnInit {
-  filtros = {'tipo': null, 'marca': null};
   menuTipos = [];
   menuMarcas = [];
-  menuCheckbox = [];
   articulos = [];
-  articulosFiltrados = [];
-  paginacion = 5;
+  articulosCopy = [];
+  paginacion = 6;
   paginaActual: number;
-
+  
+  filtros = {
+    "orden":  null,
+    "titulo": null, 
+    "tipo":   null, 
+    "marca":  null
+  };
 
 
   constructor(private router: Router, private tiendaService: TiendaService, breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private titleService: Title, private breadcrumbs: BreadcrumbsService) { 
@@ -48,58 +52,79 @@ export class TiendaComponent implements OnInit {
   }
 
   getArticulos(): any {
-    
     this.tiendaService.getArticulos().subscribe(response => {
       this.articulos = response;
-      this.articulosFiltrados = response;
+      this.articulosCopy = response;
     });
 
     this.tiendaService.getMenuItems('tipos').subscribe(response => {this.menuTipos = response; });
     this.tiendaService.getMenuItems('marcas').subscribe(response => {this.menuMarcas = response; });
   }
-
-
-  ordenar(event: any) {
-    const orden = event.target.value;
-
-    if (orden === 'desc') {this.articulos.sort((a, b) => b.precio - a.precio); }
-    if (orden === 'asc') {this.articulos.sort((a, b) => a.precio - b.precio); }
-  }
-
-  filtrarPorTitulo(event: any): any {
-    this.articulos = this.articulosFiltrados.filter(response =>
-      response.nombre.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1);
-  }
+  
 
 
   verDetalle(k) {
     this.router.navigate(['/tienda/articulo/'+k]);
   }
-  
-  filtrar(apartado, item) {
-    if (apartado === 'tipo') { this.filtros.tipo = item; }
-    if (apartado === 'marca') { this.filtros.marca = item; }
-    
-    $('.eliminarFiltros').css({'display': 'inline'});
 
-    if (this.filtros.tipo !== null && this.filtros.marca !== null) {
-      this.articulos = this.articulosFiltrados.filter(response => response.tipo.indexOf(this.filtros.tipo) !== -1 && response.marca.indexOf(this.filtros.marca) !== -1);
-    } else if (apartado === 'tipo') {
-      this.articulos = this.articulosFiltrados.filter(response => response.tipo.indexOf(item) !== -1);
-    } else if (apartado === 'marca') {
-      this.articulos = this.articulosFiltrados.filter(response => response.marca.indexOf(item) !== -1);
+
+  
+
+
+  ordenar(event: any) {
+    this.filtros.orden = event.target.value;
+    this.aplicarFiltros();
+  }
+
+  filtrarPorTitulo(event: any): any {
+    this.filtros.titulo = event.target.value;
+    this.aplicarFiltros();
+  }
+
+
+  removeChecked(event: any, filtro: string) {
+    $(event.target).parent().parent().siblings().each(function(){
+      $(this).find('input[type=radio]').removeClass('checked');
+    });
+
+    if ($(event.target).hasClass("checked")) {
+      $(event.target).prop("checked", false);
+      $(event.target).removeClass("checked");
+      if (filtro === 'tipo') this.filtros.tipo = null;
+      if (filtro === 'marca') this.filtros.marca = null;
+    } else {
+      $(event.target).addClass("checked");
     }
   }
 
-  eliminarFiltros(apartado) {
-    $('.eliminarFiltros').css({'display': 'none'});
-    $('#card-articulos input[type=radio]:checked, #card-marcas input[type=radio]:checked').prop('checked', false);
-
-    this.filtros.tipo = null;
-    this.filtros.marca = null;
-    this.articulos = this.articulosFiltrados;
+  filtrarTipo(event: any) {
+    this.filtros.tipo = event.target.value;
+    this.removeChecked(event, 'tipo');
+    this.aplicarFiltros();
   }
 
+  filtrarMarca(event: any) {
+    this.filtros.marca = event.target.value;
+    this.removeChecked(event, 'marca');
+    this.aplicarFiltros();
+  }
+
+
+
+  aplicarFiltros () {
+    this.articulos = this.articulosCopy;
+
+    const orden = this.filtros.orden;
+    const titulo = this.filtros.titulo;
+    const tipo   = this.filtros.tipo;
+    const marca  = this.filtros.marca;
+
+    if (titulo) {this.articulos = this.articulos.filter(response => response.nombre.toLowerCase().indexOf(titulo.toLowerCase()) !== -1);}
+    if (tipo) {this.articulos = this.articulos.filter(response => response.tipo.indexOf(tipo) !== -1);}
+    if (marca) {this.articulos = this.articulos.filter(response => response.marca.indexOf(marca) !== -1);}
+    if (orden === 'desc') {this.articulos.sort((a, b) => b.precio - a.precio); }
+    if (orden === 'asc') {this.articulos.sort((a, b) => a.precio - b.precio); }
+  }
 
 
   modificarMenuLateral(parametro) {

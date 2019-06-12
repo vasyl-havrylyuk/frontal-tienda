@@ -10,6 +10,7 @@
                     <label class="sr-only" for="ordenar">Ordenar</label>
                     
                     <select class="filtro form-control" name="ordenar" id="ordenar" (change)="ordenar($event)">
+                        <option>Ordenar</option>
                         <option value="desc">Precio: más caros primero</option>
                         <option value="asc">Precio: más baratos primero</option>
                     </select>
@@ -48,10 +49,9 @@
                                             <div *ngFor="let item of menuTipos">
                 
                                                 <label class="container">{{item.tipo}}
-                                                    <input type="radio" class="categoria" name="tipo" (click)="filtrar('tipo', item.tipo)">
+                                                    <input type="radio" class="categoria" name="tipo" value="{{item.tipo}}" (click)="filtrarTipo($event)">
                                                     <span class="checkmark"></span>
                                                 </label>
-
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                             <div *ngFor="let item of menuMarcas">
                                                 
                                                 <label class="container">{{item.marca}}
-                                                    <input type="radio" class="marca" name="marca" (click)="filtrar('marca', item.marca)">
+                                                    <input type="radio" class="marca" checkeado="false" name="marca" value="{{item.marca}}" (click)="filtrarMarca($event)">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 
@@ -99,12 +99,12 @@
                             <span>Mostrar </span>
 
                             <select [(ngModel)]="paginacion">
-                                <option [value]="1000000">Ver todos</option>
-                                <option [value]="5" selected="selected">5</option>
-                                <option [value]="10">10</option>
-                                <option [value]="15">15</option>
-                                <option [value]="20">20</option>
                                 
+                                <option [value]="12" selected="selected">12</option>
+                                <option [value]="18">18</option>
+                                <option [value]="24">24</option>
+                                <option [value]="30">30</option>
+                                <option [value]="1000000000000">Ver todos</option>
                             </select>
 
                             <span> por página</span>
