@@ -76,7 +76,7 @@ export class SignupComponent implements OnInit {
       if (response.registrado) {
         $('#envioMensaje').modal('show');
         setTimeout(function() {
-          this.router.navigate(['/login/cuenta']);
+          window.location.href = '/login/cuenta';
         }, 3500);
         
         this.logService.loguearDato(['info', response.usuario + ' se ha registrado']).subscribe(response => {});

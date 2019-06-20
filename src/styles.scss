@@ -34,13 +34,10 @@ body {
     z-index: 1000;
     display: none;
     text-align: center;
-
-    .headerTextSpinner, .spinner {
-        margin-top: 10vw;
-    }
+    padding-top: 220px;
 
     .headerTextSpinner {
-        font-size: 30px;
+        font-size: 30px;    
     }
 
     .spinner {
