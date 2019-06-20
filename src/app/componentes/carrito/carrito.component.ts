@@ -106,29 +106,32 @@ export class CarritoComponent implements OnInit {
     return tmp.toFixed(2);
   }
 
-  eliminarDelCarrito(articulo) {
+  eliminarDelCarrito(event: any, articulo) {
     const tmp = this.getCarrito();
-
-    for (let i = 0; i < tmp.length; i++) {
-      if (tmp[i].k === articulo.k) {
-        tmp.splice(tmp.indexOf(tmp[i]), 1);
-        this.setCarrito(tmp);
-        break;
+    let $articulo = $(event.target).parent().parent().parent().parent(); 
+    
+    $($articulo).hide("slow", () => {
+      $($articulo).remove();
+      for (let i = 0; i < tmp.length; i++) {
+        if (tmp[i].k === articulo.k) {
+          tmp.splice(tmp.indexOf(tmp[i]), 1);
+          this.setCarrito(tmp);
+          break;
+        }
       }
-    }
-    
-    this.carritoService.actualizarContador();
-
-
-    if (tmp.length <= 0) {
-      this.router.navigate(['/tienda']);
-    } else {
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate(['/tienda/carrito'])
-      })
-    }
-    
+  
+      this.carritoService.actualizarContador();
+  
+      if (tmp.length <= 0) {
+        this.router.navigate(['/tienda']);
+      } else {
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+          this.router.navigate(['/tienda/carrito'])
+        })
+      }
+    });
   }
+
 
   vaciarCarrito() {
     this.setCarrito([]);

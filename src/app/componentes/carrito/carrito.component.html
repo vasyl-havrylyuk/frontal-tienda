@@ -28,7 +28,7 @@
                   <div class="col-6 col-sm text-nowrap">Cantidad: {{articulo.cantidad}}</div>
                   <div class="col-6 col-sm text-nowrap">Precio total: {{articulo.totalArticulo}}€</div>
                   <div class="col-6 col-sm text-right text-center text-sm-right">
-                    <i class="fas fa-times eliminarDelCarrito bg-danger text-white py-1 px-1" (click)="eliminarDelCarrito(articulo)"></i>
+                    <i class="fas fa-times eliminarDelCarrito bg-danger text-white py-1 px-1" (click)="eliminarDelCarrito($event, articulo)"></i>
                   </div>
                   <div class="col-12">
                     <hr>
